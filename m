@@ -1,84 +1,86 @@
 Return-Path: <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 X-Original-To: lists+linuxppc-users@lfdr.de
 Delivered-To: lists+linuxppc-users@lfdr.de
+Received: from lists.ozlabs.org (lists.ozlabs.org [203.11.71.2])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDED136E11
+	for <lists+linuxppc-users@lfdr.de>; Thu,  6 Jun 2019 10:04:04 +0200 (CEST)
 Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31A73246E3
-	for <lists+linuxppc-users@lfdr.de>; Tue, 21 May 2019 06:32:16 +0200 (CEST)
-Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
-	by lists.ozlabs.org (Postfix) with ESMTP id 457NCK56MgzDqKj
-	for <lists+linuxppc-users@lfdr.de>; Tue, 21 May 2019 14:32:13 +1000 (AEST)
+	by lists.ozlabs.org (Postfix) with ESMTP id 45KJ8L13kTzDqVP
+	for <lists+linuxppc-users@lfdr.de>; Thu,  6 Jun 2019 18:04:02 +1000 (AEST)
 X-Original-To: linuxppc-users@lists.ozlabs.org
 Delivered-To: linuxppc-users@lists.ozlabs.org
 Authentication-Results: lists.ozlabs.org;
- spf=pass (mailfrom) smtp.mailfrom=linux.ibm.com
- (client-ip=148.163.156.1; helo=mx0a-001b2d01.pphosted.com;
- envelope-from=anton@linux.ibm.com; receiver=<UNKNOWN>)
+ spf=pass (mailfrom) smtp.mailfrom=renault.com
+ (client-ip=193.194.133.49; helo=smtp26.renault.fr;
+ envelope-from=prvs=0538227fb=sacha.gosselin-extern@renault.com;
+ receiver=<UNKNOWN>)
 Authentication-Results: lists.ozlabs.org;
- dmarc=none (p=none dis=none) header.from=linux.ibm.com
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
+ dmarc=pass (p=none dis=none) header.from=renault.com
+Authentication-Results: lists.ozlabs.org; dkim=pass (1024-bit key;
+ unprotected) header.d=renault.com header.i=@renault.com header.b="jMBR3ZQE"; 
+ dkim=fail reason="signature verification failed" (1024-bit key;
+ unprotected) header.d=grouperenault.onmicrosoft.com
+ header.i=@grouperenault.onmicrosoft.com header.b="WvFPIxvM"; 
+ dkim-atps=neutral
+X-Greylist: delayed 72 seconds by postgrey-1.36 at bilbo;
+ Thu, 06 Jun 2019 18:03:49 AEST
+Received: from smtp26.renault.fr (smtp26.renault.fr [193.194.133.49])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by lists.ozlabs.org (Postfix) with ESMTPS id 457NC93MRtzDqCl
- for <linuxppc-users@lists.ozlabs.org>; Tue, 21 May 2019 14:32:05 +1000 (AEST)
-Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4L4VrBb007947
- for <linuxppc-users@lists.ozlabs.org>; Tue, 21 May 2019 00:32:03 -0400
-Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2sm6srxqpg-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <linuxppc-users@lists.ozlabs.org>; Tue, 21 May 2019 00:32:02 -0400
-Received: from localhost
- by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <linuxppc-users@lists.ozlabs.org> from <anton@linux.ibm.com>;
- Tue, 21 May 2019 05:32:00 +0100
-Received: from b06cxnps4074.portsmouth.uk.ibm.com (9.149.109.196)
- by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Tue, 21 May 2019 05:31:57 +0100
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com
- (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
- by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- x4L4Vue736306978
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 21 May 2019 04:31:56 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id D14F8A405C;
- Tue, 21 May 2019 04:31:56 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 7FD61A4054;
- Tue, 21 May 2019 04:31:56 +0000 (GMT)
-Received: from ozlabs.au.ibm.com (unknown [9.192.253.14])
- by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Tue, 21 May 2019 04:31:56 +0000 (GMT)
-Received: from kryten (unknown [9.81.198.209])
- (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ozlabs.au.ibm.com (Postfix) with ESMTPSA id 592D1A0131;
- Tue, 21 May 2019 14:31:55 +1000 (AEST)
-Date: Tue, 21 May 2019 14:31:54 +1000
-From: Anton Blanchard <anton@linux.ibm.com>
-To: dftxbs3e@free.fr
-In-Reply-To: <c22b01d0f00fb508fe64b314df6532e0@free.fr>
-References: <c22b01d0f00fb508fe64b314df6532e0@free.fr>
+ by lists.ozlabs.org (Postfix) with ESMTPS id 45KJ8541HYzDqVP
+ for <linuxppc-users@lists.ozlabs.org>; Thu,  6 Jun 2019 18:03:48 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=renault.com; i=@renault.com; q=dns/txt;
+ s=dkim-renault-com; t=1559808230; x=1591344230;
+ h=from:to:subject:date:message-id:mime-version;
+ bh=YR0+tvwPg1lmRV0PujZfrwNC0emwKg6uNFok1uBJjjo=;
+ b=jMBR3ZQEJXm2ftmZHXmTb3BEWAUtqhBgKGr99FUQFawzyaylE2pc4UiQ
+ oWHNOHxUHNdsB3ZjzbwSDKzLi7Z4HH868oV4kKoCMq6ij1qepivk+q+sz
+ sqsa+jIeRFZ+XQ812ZGB+q32EMJrwhCkgxmbdFx5PFZ1KQ5ZgEVKLB460 8=;
+X-IronPort-AV: E=Sophos;i="5.63,558,1557180000"; 
+ d="scan'208,217";a="400265496"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=grouperenault.onmicrosoft.com; s=selector2-grouperenault-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=L+pWxKhbsHvDAbnHmmGEqIINESYxjWtLQ/6lms4CpUk=;
+ b=WvFPIxvM3v3cC+KoLqxoFx4OLA79Dn6X408WjkehRMEhECUB+ycIPathCtXg4lBYNquVUM9Yq4iG6OtqKU1cX2TFHbBkNsCj6/asVblUUgGIPrG9whU9k9lbOchWpX3RR9D2QOKIfIUlpH+QAwGsAEmCNhZg5BO3hou7TKNPjqI=
+From: "GOSSELIN Sacha (renexter)" <sacha.gosselin-extern@renault.com>
+To: "linuxppc-users@lists.ozlabs.org" <linuxppc-users@lists.ozlabs.org>
+Thread-Topic: Redhat 8 on Power9 certification - SAP HANA
+Thread-Index: AdUcPimYUDjPFpfJR6SQvgELhrBshg==
+Date: Thu, 6 Jun 2019 08:02:21 +0000
+Message-ID: <AM6PR05MB4150FEB18E045FF54F7516A5AD170@AM6PR05MB4150.eurprd05.prod.outlook.com>
+Accept-Language: fr-FR, en-US
+Content-Language: fr-FR
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [138.21.12.20]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 984a8170-946c-40ee-26ab-08d6ea554df4
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);
+ SRVR:AM6PR05MB5975; 
+x-ms-traffictypediagnostic: AM6PR05MB5975:
+x-microsoft-antispam-prvs: <AM6PR05MB5975B21C5618F78E7A6DA941AD170@AM6PR05MB5975.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-forefront-prvs: 00603B7EEF
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(39860400002)(376002)(366004)(396003)(346002)(136003)(189003)(199004)(486006)(99286004)(186003)(2351001)(6436002)(14454004)(7696005)(68736007)(86362001)(74316002)(2501003)(33656002)(476003)(102836004)(26005)(71190400001)(256004)(71200400001)(6506007)(66066001)(3846002)(790700001)(6116002)(25786009)(316002)(52536014)(6916009)(8676002)(5660300002)(9686003)(55016002)(4744005)(7736002)(5640700003)(6306002)(54896002)(73956011)(66946007)(478600001)(2906002)(76116006)(8936002)(53936002)(64756008)(66476007)(66446008)(81156014)(81166006)(66556008);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:AM6PR05MB5975;
+ H:AM6PR05MB4150.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: mlj3I1LRAKVIpZpVOrhrbY3ARL0svTMi1CDomxlBvxGbHOGjUPk0MlV1jEMpw24lZ6Bn+C1u9Auhi3KXQUVh/qM1oXPogfckyqT48+jGggACCTg+BHOzjKBcOfoF2V+csz34jifZDZtQgyJAvL9sQM5JYEsyCRKbuNNq/HGLx4CgPeIWJJxkrxOUC4K8ZAHAmyO+tKNh8qT/RSd+yH8/fdI8THC5WpSQtCcXEGbSJ1gwlYKR6fQ3643Tya96AL37EXOvvGRY+G0d86+MMvyX91Tvhy1zS7vNT1tE0a0xk/bhllQhcmb/7Yiyn7hOH88AujKKkgyECrBlICi0RdNvr/ZClS37dbtaRVjkUeSQRIlEaBPKVbvDfPNOoXQJtn7bi9YFblfckFhAdhIQ0SOQNqaRqIkTW4sguTBCoWFB088=
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19052104-0028-0000-0000-0000036FCFD2
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19052104-0029-0000-0000-0000242F77D8
-Message-Id: <20190521143154.7ad4f4f8@kryten>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-05-20_09:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=735 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1810050000 definitions=main-1905210029
-Subject: Re: [Linuxppc-users] [EXTERNAL] AES NX Coprocessor dm-crypt support
+X-OriginatorOrg: renault.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 984a8170-946c-40ee-26ab-08d6ea554df4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Jun 2019 08:02:21.9320 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d6b0bbee-7cd9-4d60-bce6-4a67b543e2ae
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: sacha.gosselin-extern@renault.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR05MB5975
+Subject: [Linuxppc-users] Redhat 8 on Power9 certification - SAP HANA
 X-BeenThere: linuxppc-users@lists.ozlabs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,69 +93,172 @@ List-Post: <mailto:linuxppc-users@lists.ozlabs.org>
 List-Help: <mailto:linuxppc-users-request@lists.ozlabs.org?subject=help>
 List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-users>,
  <mailto:linuxppc-users-request@lists.ozlabs.org?subject=subscribe>
-Cc: linuxppc-users@lists.ozlabs.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============5395002488998159584=="
 Errors-To: linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org
 Sender: "Linuxppc-users"
  <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 
-Hi,
+--===============5395002488998159584==
+Content-Language: fr-FR
+Content-Type: multipart/alternative;
+	boundary="_000_AM6PR05MB4150FEB18E045FF54F7516A5AD170AM6PR05MB4150eurp_"
 
-> I am interested in support for the NX AES Coprocessor as described in 
-> section 11.1 and 25.3 of the POWER9 User Manual in Linux's dm-crypt.
-> 
-> Currently I am using LUKS on NVMe drives that advertise having
-> 3.2GB/s read speeds (Samsung) and I am currently capped to 1GB/s with
-> current on-chip instructions (vcipher etc).
-> 
-> If we consider the advertised performance for the NX Coprocessors and
-> my dual CPU system, two NX engines per CPU (6.4 * 2 * 2), it would
-> total for 25.6 Gbps 256bit AES performance which equals 3.2GB/s. That
-> would allow me to use LUKS over my NVMe drives without performance
-> loss, which is needless to say, quite awesome.
+--_000_AM6PR05MB4150FEB18E045FF54F7516A5AD170AM6PR05MB4150eurp_
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 
-What algorithm are you using? Is it AES-XTS? On my box:
+Hello,
 
-# cryptsetup benchmark --cipher aes-xts-plain64
+I'm SAP HANA Technical Consultant and I'm looking for roadmap or informatio=
+n about Redhat8 certification on Power9.
 
-#     Algorithm | Key |  Encryption |  Decryption
-        aes-xts   256b  2332.2 MiB/s  2366.8 MiB/s
+Of course, it's in SAP HANA perimeter and I asked to SAP but they have no i=
+dea about the schedule or if it is scheduled.. I don't  understand.
 
-That's just crypto performance - adding in I/O will see that number drop,
-but 1 GB/sec seems a bit low. I just took a look at the AES-XTS
-algorithm and I see a few places we can pick up a bit of performance
-(perhaps 10%).
+The problem is that no Redhat version is supported on Power9, only SLES.
 
-Keep in mind that you are comparing a single threaded in core result
-with a projected multi threaded NX result. The in core results will
-scale with the number of cores you have, and even 2 cores will exceed
-the performance of all 4 NX accelerators.
+So if you have any information about Redhat on Power 9, it's welcome
 
-Thanks,
-Anton
+Thanks a lot,
 
-> 
-> Another significant benefit of this would be XMR mining, the current 
-> latest POWER miner does not make use of NX coprocessors. ( 
-> https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_madscientist159_xmrig&d=DwICAg&c=jf_iaSHvJObTbx-siA1ZOg&r=azkGdnz7EYeVmhCvUFAXMMwzYZqpcBIElGi1DsA0tKU&m=Nito0Ak3Mdo6mT2SflTzQb-SP6s6Zzu4kvBvoWYcJek&s=1G2rfMAGH6r7CmZqKQaZy9InJT-f8AD2yKJPYMTuCF8&e= ).
-> 
-> How would I go about this? Currently there's a gzip implementation at 
-> https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_abalib_power-2Dgzip&d=DwICAg&c=jf_iaSHvJObTbx-siA1ZOg&r=azkGdnz7EYeVmhCvUFAXMMwzYZqpcBIElGi1DsA0tKU&m=Nito0Ak3Mdo6mT2SflTzQb-SP6s6Zzu4kvBvoWYcJek&s=yCOEOyXyZMDPplivKtIC-X6iUbm2OcGxeqtt8qn07ac&e=
-> - it's cited in the manual.
-> 
-> PS: I'm part of an active community around POWER9 and the Talos II 
-> systems at #talos-workstation on Freenode IRC, feel free to join and 
-> ping JSharp, tpearson, koenigni, awordnot or (myself) dftxbs3e about 
-> this.
-> 
-> Thanks
-> _______________________________________________
-> Linuxppc-users mailing list
-> Linuxppc-users@lists.ozlabs.org
-> https://urldefense.proofpoint.com/v2/url?u=https-3A__lists.ozlabs.org_listinfo_linuxppc-2Dusers&d=DwICAg&c=jf_iaSHvJObTbx-siA1ZOg&r=azkGdnz7EYeVmhCvUFAXMMwzYZqpcBIElGi1DsA0tKU&m=Nito0Ak3Mdo6mT2SflTzQb-SP6s6Zzu4kvBvoWYcJek&s=gR67RzAkTYo7EfuE7v7dLYhNnABkDUIkiF6LnoZIlkE&e=
+Regards,
+Sacha Gosselin
+
+-- Disclaimer ------------------------------------ =
+
+Ce message ainsi que les eventuelles pieces jointes constituent une corresp=
+ondance privee et confidentielle a l'attention exclusive du destinataire de=
+signe ci-dessus. Si vous n'etes pas le destinataire du present message ou u=
+ne personne susceptible de pouvoir le lui delivrer, il vous est signifie qu=
+e toute divulgation, distribution ou copie de cette transmission est strict=
+ement interdite. Si vous avez recu ce message par erreur, nous vous remerci=
+ons d'en informer l'expediteur par telephone ou de lui retourner le present=
+ message, puis d'effacer immediatement ce message de votre systeme.
+
+*** This e-mail and any attachments is a confidential correspondence intend=
+ed only for use of the individual or entity named above. If you are not the=
+ intended recipient or the agent responsible for delivering the message to =
+the intended recipient, you are hereby notified that any disclosure, distri=
+bution or copying of this communication is strictly prohibited. If you have=
+ received this communication in error, please notify the sender by phone or=
+ by replying this message, and then delete this message from your system.
+
+--_000_AM6PR05MB4150FEB18E045FF54F7516A5AD170AM6PR05MB4150eurp_
+Content-Type: text/html; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"FR" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hello,<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">I&#8217;m SAP HANA Technical Co=
+nsultant and I&#8217;m looking for roadmap or information about Redhat8 cer=
+tification on Power9.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Of course, it&#8217;s in SAP HA=
+NA perimeter and I asked to SAP but they have no idea about the schedule or=
+ if it is scheduled.. I don&#8217;t &nbsp;understand.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">The problem is that no Redhat v=
+ersion is supported on Power9, only SLES.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">So if you have any information =
+about Redhat on Power 9, it&#8217;s welcome<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Thanks a lot,<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Regards,<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Sacha Gosselin<o:p></o:p></span=
+></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+</div>
+<p>-- Disclaimer ------------------------------------ <br>
+Ce message ainsi que les eventuelles pieces jointes constituent une corresp=
+ondance privee et confidentielle a l'attention exclusive du destinataire de=
+signe ci-dessus. Si vous n'etes pas le destinataire du present message ou u=
+ne personne susceptible de pouvoir le lui delivrer, il vous est signifie qu=
+e toute divulgation, distribution ou copie de cette transmission est strict=
+ement interdite. Si vous avez recu ce message par erreur, nous vous remerci=
+ons d'en informer l'expediteur par telephone ou de lui retourner le present=
+ message, puis d'effacer immediatement ce message de votre systeme.</p>
+
+<p>*** This e-mail and any attachments is a confidential correspondence int=
+ended only for use of the individual or entity named above. If you are not =
+the intended recipient or the agent responsible for delivering the message =
+to the intended recipient, you are hereby notified that any disclosure, dis=
+tribution or copying of this communication is strictly prohibited. If you h=
+ave received this communication in error, please notify the sender by phone=
+ or by replying this message, and then delete this message from your system=
+.</p></body>
+</html>
+
+--_000_AM6PR05MB4150FEB18E045FF54F7516A5AD170AM6PR05MB4150eurp_--
+
+
+--===============5395002488998159584==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Linuxppc-users mailing list
 Linuxppc-users@lists.ozlabs.org
 https://lists.ozlabs.org/listinfo/linuxppc-users
+
+--===============5395002488998159584==--
+

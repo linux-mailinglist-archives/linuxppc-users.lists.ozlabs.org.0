@@ -1,51 +1,35 @@
 Return-Path: <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 X-Original-To: lists+linuxppc-users@lfdr.de
 Delivered-To: lists+linuxppc-users@lfdr.de
-Received: from lists.ozlabs.org (lists.ozlabs.org [203.11.71.2])
-	by mail.lfdr.de (Postfix) with ESMTPS id E01063BDDC
-	for <lists+linuxppc-users@lfdr.de>; Mon, 10 Jun 2019 22:54:05 +0200 (CEST)
 Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
-	by lists.ozlabs.org (Postfix) with ESMTP id 45N52z1mYKzDqSg
-	for <lists+linuxppc-users@lfdr.de>; Tue, 11 Jun 2019 06:54:03 +1000 (AEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E69750F16
+	for <lists+linuxppc-users@lfdr.de>; Mon, 24 Jun 2019 16:50:09 +0200 (CEST)
+Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
+	by lists.ozlabs.org (Postfix) with ESMTP id 45XXJb01RHzDq7F
+	for <lists+linuxppc-users@lfdr.de>; Tue, 25 Jun 2019 00:50:06 +1000 (AEST)
 X-Original-To: linuxppc-users@lists.ozlabs.org
 Delivered-To: linuxppc-users@lists.ozlabs.org
-Authentication-Results: lists.ozlabs.org;
- spf=none (mailfrom) smtp.mailfrom=student.ethz.ch
- (client-ip=82.130.75.186; helo=edge10.ethz.ch;
- envelope-from=koenigni@student.ethz.ch; receiver=<UNKNOWN>)
-Authentication-Results: lists.ozlabs.org; dmarc=none (p=none dis=none)
- header.from=student.ethz.ch
-X-Greylist: delayed 211 seconds by postgrey-1.36 at bilbo;
- Tue, 11 Jun 2019 06:46:58 AEST
-Received: from edge10.ethz.ch (edge10.ethz.ch [82.130.75.186])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+Received: from ozlabs.org (bilbo.ozlabs.org [IPv6:2401:3900:2:1::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by lists.ozlabs.org (Postfix) with ESMTPS id 45N4tp3G5yzDqRC
- for <linuxppc-users@lists.ozlabs.org>; Tue, 11 Jun 2019 06:46:58 +1000 (AEST)
-Received: from mailm213.d.ethz.ch (129.132.139.37) by edge10.ethz.ch
- (82.130.75.186) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 10 Jun
- 2019 22:42:47 +0200
-Received: from [192.168.178.82] (87.78.108.52) by mailm213.d.ethz.ch
- (2001:67c:10ec:5603::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1713.5; Mon, 10 Jun
- 2019 22:42:48 +0200
-To: Pat Haugen <pthaugen@linux.ibm.com>, <linuxppc-users@lists.ozlabs.org>
-References: <ac9c89c3-6f16-3090-35a8-7a58c5c4458f@student.ethz.ch>
- <cff6648f-4c8d-1307-7aee-aa035b63d41d@linux.ibm.com>
-From: Nicolas Koenig <koenigni@student.ethz.ch>
-Message-ID: <e8d7c2df-e42d-ebd4-598a-2be71420031a@student.ethz.ch>
-Date: Tue, 11 Jun 2019 00:42:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ by lists.ozlabs.org (Postfix) with ESMTPS id 45XXBQ6tJ8zDqKK;
+ Tue, 25 Jun 2019 00:44:46 +1000 (AEST)
+Authentication-Results: lists.ozlabs.org; dmarc=none (p=none dis=none)
+ header.from=ellerman.id.au
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 45XXBP2K0pz9s6w;
+ Tue, 25 Jun 2019 00:44:44 +1000 (AEST)
+From: Michael Ellerman <mpe@ellerman.id.au>
+To: oss-security@lists.openwall.com
+Date: Tue, 25 Jun 2019 00:44:31 +1000
+Message-ID: <87lfxr82ls.fsf@concordia.ellerman.id.au>
 MIME-Version: 1.0
-In-Reply-To: <cff6648f-4c8d-1307-7aee-aa035b63d41d@linux.ibm.com>
-Content-Language: en-US
-X-Originating-IP: [87.78.108.52]
-X-ClientProxiedBy: mailm111.d.ethz.ch (2001:67c:10ec:5602::23) To
- mailm213.d.ethz.ch (2001:67c:10ec:5603::27)
-X-TM-SNTS-SMTP: 1B33499D60F0E3621289C23CCFE227FB38DD5AB345DAA73F9025E202D3B691422000:8
-Subject: Re: [Linuxppc-users] Discrepancies between Performance Simulator
- and Silicon
+Subject: [Linuxppc-users] CVE-2019-12817: Linux kernel: powerpc: Unrelated
+ processes may be able to read/write to each other's virtual memory
 X-BeenThere: linuxppc-users@lists.ozlabs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,47 +42,186 @@ List-Post: <mailto:linuxppc-users@lists.ozlabs.org>
 List-Help: <mailto:linuxppc-users-request@lists.ozlabs.org?subject=help>
 List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-users>,
  <mailto:linuxppc-users-request@lists.ozlabs.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org,
+ linuxppc-users@lists.ozlabs.org
+Content-Type: multipart/mixed; boundary="===============8320439488825509874=="
 Errors-To: linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org
 Sender: "Linuxppc-users"
  <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 
-SGVsbG8gUGF0LAoKT24gMTAvMDYvMjAxOSAxOToyNiwgUGF0IEhhdWdlbiB3cm90ZToKPiBPbiA2
-LzgvMTkgNjowNiBQTSwgTmljb2xhcyBLb2VuaWcgd3JvdGU6Cj4+IEhlbGxvIGV2ZXJ5b25lLAo+
-Pgo+PiB3aGlsZSB0cnlpbmcgdG8gc29sdmUgdGhlIHJpZGRsZSBzdXJyb3VuZGluZyB4c2FkZGRw
-J3MgdGhyb3VnaHB1dCwgSSByZWNlbnRseSBjYW1lIGFjcm9zcyB0aGUgcG93ZXI5IHBlcmZvcm1h
-bmNlIHNpbXVsYXRvciwgd2hpY2ggaXMgc3VwcG9zZWQgdG8gYmUgY3ljbGUtYWNjdXJhdGUuIFdo
-ZW4gdHJ5aW5nIGl0LCBJIG5vdGljZWQgdGhhdCB0aGVyZSBhcHBlYXJzIHRvIGJlIGEgZGlzY3Jl
-cGFuY3kgZm9yIHRoZSBmb2xsb3dpbmcgY29kZToKPj4KPj4gbG9vcDoKPj4gIMKgIC5yZXB0IDE2
-Cj4+ICDCoMKgwqAgbXR2c3JkICV2czEsICVyMwo+PiAgwqAgLmVuZHIKPj4gIMKgIGJkbnogbG9v
-cAo+Pgo+PiBXaGVuIGV4ZWN1dGluZyBpdCBpbiB0aGUgcGVyZm9ybWFuY2Ugc2ltdWxhdG9yLCBp
-dCB5aWVsZHMgYSBzdGFibGUgNCBtdHZzcmQgaW5zdHJ1Y3Rpb25zIHBlciBjeWNsZSAoZXhjbHVk
-aW5nIGJyYW5jaGVzKSwgd2hpbGUgdGhlIGFjdHVhbCBzaWxpY29uIGNhbiBvbmx5IHN1c3RhaW4g
-MyBtdHZzcmQgaW5zdHJ1Y3Rpb25zIHBlciBjeWNsZSAoYWdhaW4sIGV4Y2x1ZGluZyBicmFuY2hl
-cykuIFdoYXQgbWlnaHQgYmUgdGhlIHJlYXNvbiBmb3IgdGhpcyBkaWZmZXJlbmNlPwo+Pgo+IEhv
-dyBkaWQgeW91IGRldGVybWluZSB0aGUgaGFyZHdhcmUgY2FuIG9ubHkgc3VzdGFpbiAzPyBJcyB0
-aGUgbG9vcCBhdCBsZWFzdCBxdWFkd29yZCBhbGlnbmVkIHRvIGVsaW1pbmF0ZSBhbnkgdmFyaWFi
-aWxpdHkgYmV0d2VlbiB0aGUgdHdvIHdydCBmZXRjaGluZyBiZWhhdmlvcj8KCkEgYml0IG1vcmUg
-b2YgdGhlIGNvZGUgKE5VTV9JTlNUUiA9IDE2LCBjdHIgPSAweDgwMDApOgoKICAgbWZzcHIgJXI1
-LCA3NzYKLmFsaWduIDQKbXR2c3JfbG9vcDoKLnJlcHQgTlVNX0lOU1RSCiAgIG10dnNyZCAldnM5
-LCAlcjMKLmVuZHIKICAgYmRueiBtdHZzcl9sb29wCi5hbGlnbiA0CiAgIG1mc3ByICVyNiwgNzc2
-CgpJIGRldGVybWluZWQgdGhlIHRocm91Z2hwdXQgb2YgbXR2c3JkIGluc3RydWN0aW9ucyB2aWEg
-CihudW1faXRlcmF0aW9ucypOVU1fSU5TVFIpLyglcjYtJXI1KSwgd2hpY2ggdHVybmVkIG91dCB0
-byBiZSAyLjk2MSBpL2MgCmluIHRoZSB0ZXN0IEkganVzdCByYW4uIEluY3JlYXNpbmcgTlVNX0lO
-U1RSIGZ1cnRoZXIgY29udmVyZ2VzIHRoZSAKcmVzdWx0IChOVU1fSU5TVFI9MzIgeWllbGRzIDIu
-OTk1IGkvYykuCgpUaGUgd2hvbGUgdGVzdCBjb2RlIGlzIGF0IApodHRwczovL2dpdGh1Yi5jb20v
-RGljaGxvcm9tZXRoYW5lL3B3cjkvYmxvYi9tYXN0ZXIvYmVuY2gvbWF4dGhyb3VnaHB1dC8KClRo
-ZSBwcm9jZXNzb3IgaXMgYSBQOSBTZm9yemEgRDIuMiAocHZyIDAwNGUgMTIwMikgYW5kIHRoZSBw
-ZXJmb3JtYW5jZSAKc2ltdWxhdG9yIHNheXMgICJWZXJzaW9uOiBwOSB2MTY2MiBidWlsdCBvbiBG
-cmkgSmFuIDE5IDA4OjE1OjU5IDIwMSIsIGlmIAp0aGF0IGlzIG9mIGFueSBoZWxwLgoKVGhhbmsg
-eW91IGZvciBsb29raW5nIGludG8gdGhpcwogICBOaWNvbGFzCgo+IAo+PiBUaGFua3MgaW4gYWR2
-YW5jZQo+PiAgwqAgTmljb2xhcwo+Pgo+PiBQLlMuOiBJdCBhbHNvIHNlZW1zIGxpa2Ugc2Nyb2xs
-cHYgY2FuJ3QgZGlzYXNzZW1ibGUgdGhlIG10dnNyZCBpbnN0cnVjdGlvbiwgaXQganVzdCBzaG93
-cyA/Pz8/Pz8gYW5kIHRoZSBpbnN0cnVjdGlvbiBpbiBoZXggKGl0IGlzIHRoZSByaWdodCBpbnN0
-cnVjdGlvbiB0aG91Z2gsIEkgZG91YmxlIGNoZWNrZWQpLgo+IAo+IFNvdW5kcyBsaWtlIGFuIG9s
-ZCB2ZXJzaW9uIG9yIG1pc3NpbmcgZmxhZyBmb3Igd2hhdGV2ZXIgc2Nyb2xscHYgdXNlcyBmb3Ig
-ZGlzYXNzZW1ibGluZy4KPiAKPiAtUGF0Cj4gCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbnV4cHBjLXVzZXJzIG1haWxpbmcgbGlzdApMaW51eHBwYy11
-c2Vyc0BsaXN0cy5vemxhYnMub3JnCmh0dHBzOi8vbGlzdHMub3psYWJzLm9yZy9saXN0aW5mby9s
-aW51eHBwYy11c2Vycwo=
+--===============8320439488825509874==
+Content-Type: multipart/signed; boundary="=-=-=";
+	micalg=pgp-sha256; protocol="application/pgp-signature"
+
+--=-=-=
+Content-Type: text/plain
+
+The Linux kernel for powerpc since 4.17 has a bug where unrelated processes may
+be able to read/write to each other's virtual memory under certain conditions.
+
+This bug only affects machines using 64-bit CPUs with the hash page table MMU,
+see below for more detail on affected CPUs.
+
+To trigger the bug a process must allocate memory above 512TB. That only happens
+if userspace explicitly requests it with mmap(). That process must then fork(),
+at this point the child incorrectly inherits the "context id" of the parent
+associated with the mapping above 512TB. It may then be possible for the
+parent/child to write to each other's mappings above 512TB, which should not be
+possible, and constitutes memory corruption.
+
+If instead the child process exits, all its context ids are freed, including the
+context id that is still in use by the parent for the mapping above 512TB. That
+id can then be reallocated to a third process, that process can then read/write
+to the parent's mapping above 512TB. Additionally if the freed id is used for
+the third process's primary context id, then the parent is able to read/write to
+the third process's mappings *below* 512TB.
+
+If the parent and child both exit before another process is allocated the freed
+context id, the kernel will notice the double free of the id and print a warning
+such as:
+
+  ida_free called for id=103 which is not allocated.
+  WARNING: CPU: 8 PID: 7293 at lib/idr.c:520 ida_free_rc+0x1b4/0x1d0
+
+The bug was introduced in commit:
+  f384796c40dc ("powerpc/mm: Add support for handling > 512TB address in SLB miss")
+
+Which was originally merged in v4.17.
+
+Only machines using the hash page table (HPT) MMU are affected, eg. PowerPC 970
+(G5), PA6T, Power5/6/7/8/9. By default Power9 bare metal machines (powernv) use
+the Radix MMU and are not affected, unless the machine has been explicitly
+booted in HPT mode (using disable_radix on the kernel command line). KVM guests
+on Power9 may be affected if the host or guest is configured to use the HPT MMU.
+LPARs under PowerVM on Power9 are affected as they always use the HPT MMU.
+Kernels built with PAGE_SIZE=4K are not affected.
+
+The upstream fix is here:
+
+  https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ca72d88378b2f2444d3ec145dd442d449d3fefbc
+
+There's also a kernel selftest to verify the fix:
+
+  https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=16391bfc862342f285195013b73c1394fab28b97
+
+Or a similar standalone version is included below.
+
+cheers
+
+
+cat > test.c <<EOF
+#undef NDEBUG
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+#ifndef MAP_FIXED_NOREPLACE
+#define MAP_FIXED_NOREPLACE	MAP_FIXED	// "Should be safe" above 512TB
+#endif
+
+int main(void)
+{
+	int p2c[2], c2p[2], rc, status, c, *p;
+	unsigned long page_size;
+	pid_t pid;
+
+	page_size = sysconf(_SC_PAGESIZE);
+	if (page_size != 65536) {
+		printf("Unsupported page size - not affected\n");
+		return 1;
+	}
+
+	// Create a mapping at 512TB to allocate an extended_id
+	p = mmap((void *)(512ul << 40), page_size, PROT_READ | PROT_WRITE,
+		MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED_NOREPLACE, -1, 0);
+	if (p == MAP_FAILED) {
+		perror("mmap");
+		printf("Error: couldn't mmap(), confirm kernel has 4TB support\n");
+		return 1;
+	}
+
+	printf("parent writing %p = 1\n", p);
+	*p = 1;
+
+	assert(pipe(p2c) != -1 && pipe(c2p) != -1);
+
+	pid = fork();
+	if (pid == 0) {
+		close(p2c[1]);
+		close(c2p[0]);
+		assert(read(p2c[0], &c, 1) == 1);
+
+		pid = getpid();
+		printf("child writing  %p = %d\n", p, pid);
+		*p = pid;
+
+		assert(write(c2p[1], &c, 1) == 1);
+		assert(read(p2c[0], &c, 1) == 1);
+		exit(0);
+	}
+	close(p2c[0]);
+	close(c2p[1]);
+
+	c = 0;
+	assert(write(p2c[1], &c, 1) == 1);
+	assert(read(c2p[0], &c, 1) == 1);
+
+	// Prevent compiler optimisation
+	asm volatile("" : : : "memory");
+
+	rc = 0;
+	printf("parent reading %p = %d\n", p, *p);
+	if (*p != 1) {
+		printf("Error: BUG! parent saw child's write! *p = %d\n", *p);
+		rc = 1;
+	}
+
+	assert(write(p2c[1], &c, 1) == 1);
+	assert(waitpid(pid, &status, 0) != -1);
+	assert(WIFEXITED(status) && WEXITSTATUS(status) == 0);
+
+	if (rc == 0)
+		printf("success: test completed OK\n");
+
+	return rc;
+}
+EOF
+
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJFGtCPCthwEv2Y/bUevqPMjhpYAFAl0Q4c8ACgkQUevqPMjh
+pYBBARAAqM95nzwHVCnSIMUqAqRSuLV3UOx4KxNylmdSu3ig42AgS75KeCYyBKuT
+q8bXq4sSKS5mZAp42/YgaIQpBtv8nOGutMSivZEJmMNnL3riEd7bT63BOw8EnA20
+ryhXsqf504anqzPXYv7P5xKeoQjEbK7MhuaN9d86erot/6cWh7tCcIF0SdiPGX3W
+PLlPrptRMnPCm0QhKCZxlKPxd3qd+HPNr2RVP2bIbv+8x0fldVTR+N2+gD+a5i5p
+rLsxERpaAsPvDbQNeXN/9Wck19wx+ZQMlCxStSY+VECM2jwsXty2f93hZmQ5Nm5E
+HV+nE57IF7tI/7lrlQfQ3Xml5bhVnFXwxQhbdeZfxg5vKm8YDSB0Vu0FaA59TqK7
+ANS2VLgGZV+F0VqCkWx3mVgmJsAAKfOrTjqsQAV0zH42siyYV9AvKZDdYYOxbbkf
+ZZjol8VGh684uKxZRlHeGMBL0kztUE32FiNqrhioJfpCkNhBKPcTljfVgHdPYfzz
+ULAd4QoIUcKa4RgNN5KQgMpxajXgaLxqk8K8R566dRz1KyZnpIn41v3Mq88ApBTv
+0UQarN0AYEyWyO+YI7Q0ngFWxrrcVhA9nFMRXdIdfI581hBqtWPbvItEMFVy30fZ
+3FXzj07zCVIqm7oy21QabFaLUPAEopARj7ByxutyPJT8efdhkRc=
+=21oU
+-----END PGP SIGNATURE-----
+--=-=-=--
+
+--===============8320439488825509874==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linuxppc-users mailing list
+Linuxppc-users@lists.ozlabs.org
+https://lists.ozlabs.org/listinfo/linuxppc-users
+
+--===============8320439488825509874==--

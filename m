@@ -1,72 +1,70 @@
 Return-Path: <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 X-Original-To: lists+linuxppc-users@lfdr.de
 Delivered-To: lists+linuxppc-users@lfdr.de
-Received: from lists.ozlabs.org (lists.ozlabs.org [203.11.71.2])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9D74A6C9B
-	for <lists+linuxppc-users@lfdr.de>; Tue,  3 Sep 2019 17:12:13 +0200 (CEST)
+Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id DC6E6A6DBC
+	for <lists+linuxppc-users@lfdr.de>; Tue,  3 Sep 2019 18:15:10 +0200 (CEST)
 Received: from bilbo.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
-	by lists.ozlabs.org (Postfix) with ESMTP id 46N9RH2NCkzDqng
-	for <lists+linuxppc-users@lfdr.de>; Wed,  4 Sep 2019 01:12:11 +1000 (AEST)
+	by lists.ozlabs.org (Postfix) with ESMTP id 46NBqv61r3zDqtZ
+	for <lists+linuxppc-users@lfdr.de>; Wed,  4 Sep 2019 02:15:07 +1000 (AEST)
 X-Original-To: linuxppc-users@lists.ozlabs.org
 Delivered-To: linuxppc-users@lists.ozlabs.org
 Authentication-Results: lists.ozlabs.org;
- spf=pass (mailfrom) smtp.mailfrom=fr.ibm.com
+ spf=pass (mailfrom) smtp.mailfrom=us.ibm.com
  (client-ip=148.163.156.1; helo=mx0a-001b2d01.pphosted.com;
- envelope-from=thibaud.besson@fr.ibm.com; receiver=<UNKNOWN>)
+ envelope-from=mnellen@us.ibm.com; receiver=<UNKNOWN>)
 Authentication-Results: lists.ozlabs.org;
- dmarc=none (p=none dis=none) header.from=fr.ibm.com
+ dmarc=none (p=none dis=none) header.from=us.ibm.com
 Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
  [148.163.156.1])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by lists.ozlabs.org (Postfix) with ESMTPS id 46N99S74qgzDqXD
- for <linuxppc-users@lists.ozlabs.org>; Wed,  4 Sep 2019 01:00:12 +1000 (AEST)
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
+ by lists.ozlabs.org (Postfix) with ESMTPS id 46NBfG3lQzzDql2
+ for <linuxppc-users@lists.ozlabs.org>; Wed,  4 Sep 2019 02:06:39 +1000 (AEST)
+Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x83ESfKn027507
- for <linuxppc-users@lists.ozlabs.org>; Tue, 3 Sep 2019 10:32:04 -0400
+ x83FvKQN025717
+ for <linuxppc-users@lists.ozlabs.org>; Tue, 3 Sep 2019 12:06:37 -0400
 Received: from smtp.notes.na.collabserv.com (smtp.notes.na.collabserv.com
- [158.85.210.114])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2usrsuuw72-1
+ [192.155.248.93])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2usu0bs3cs-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <linuxppc-users@lists.ozlabs.org>; Tue, 03 Sep 2019 10:32:01 -0400
+ for <linuxppc-users@lists.ozlabs.org>; Tue, 03 Sep 2019 12:06:36 -0400
 Received: from localhost
  by smtp.notes.na.collabserv.com with smtp.notes.na.collabserv.com ESMTP
- for <linuxppc-users@lists.ozlabs.org> from <thibaud.besson@fr.ibm.com>;
- Tue, 3 Sep 2019 14:31:56 -0000
-Received: from us1b3-smtp06.a3dr.sjc01.isc4sb.com (10.122.203.184)
- by smtp.notes.na.collabserv.com (10.122.47.58) with
- smtp.notes.na.collabserv.com ESMTP; Tue, 3 Sep 2019 14:31:53 -0000
-Received: from us1b3-mail253.a3dr.sjc03.isc4sb.com ([10.160.11.182])
- by us1b3-smtp06.a3dr.sjc01.isc4sb.com
- with ESMTP id 2019090314315229-530627 ;
- Tue, 3 Sep 2019 14:31:52 +0000 
-In-Reply-To: <OFAE7466DE.11482CBD-ON00258465.004651E8-43258465.00469545@notes.na.collabserv.com>
-From: "Thibaud Besson" <thibaud.besson@fr.ibm.com>
-To: "Yasal Akgun" <YASAL@tr.ibm.com>
-Date: Tue, 3 Sep 2019 14:31:52 +0000
+ for <linuxppc-users@lists.ozlabs.org> from <mnellen@us.ibm.com>;
+ Tue, 3 Sep 2019 16:06:35 -0000
+Received: from us1a3-smtp07.a3.dal06.isc4sb.com (10.146.103.14)
+ by smtp.notes.na.collabserv.com (10.106.227.39) with
+ smtp.notes.na.collabserv.com ESMTP; Tue, 3 Sep 2019 16:06:31 -0000
+Received: from us1a3-mail29.a3.dal06.isc4sb.com ([10.146.77.233])
+ by us1a3-smtp07.a3.dal06.isc4sb.com
+ with ESMTP id 2019090316063048-731661 ;
+ Tue, 3 Sep 2019 16:06:30 +0000 
+In-Reply-To: <OF1DAD104A.0728C4AC-ON0025846A.00502AEE-1567521338935@notes.na.collabserv.com>
+From: "Mark Nellen" <mnellen@us.ibm.com>
+To: "Ahmed Amer" <ahmed.amer@ae.ibm.com>
+Date: Tue, 3 Sep 2019 16:06:30 +0000
 Sensitivity: 
-References: <OFAE7466DE.11482CBD-ON00258465.004651E8-43258465.00469545@notes.na.collabserv.com>
+References: <OF1DAD104A.0728C4AC-ON0025846A.00502AEE-1567521338935@notes.na.collabserv.com>
 Importance: Normal
 X-Priority: 3 (Normal)
 X-Mailer: IBM Verse Build 17652-1619 | IBM Domino Build
  SCN1812108_20180501T0841_FP57 August 05, 2019 at 12:42
-X-KeepSent: FDCA2225:5105CBCA-0025846A:004FD194;
- type=4; name=$KeepSent
 X-LLNOutbound: False
-X-Disclaimed: 19647
+X-Disclaimed: 1927
 X-TNEFEvaluated: 1
-x-cbid: 19090314-1639-0000-0000-0000004F67D0
-X-IBM-SpamModules-Scores: BY=0.208853; FL=0; FP=0; FZ=0; HX=0; KW=0; PH=0;
- SC=0.390428; ST=0; TS=0; UL=0; ISC=; MB=0.000003
+x-cbid: 19090316-8889-0000-0000-0000004FE4C5
+X-IBM-SpamModules-Scores: BY=0; FL=0; FP=0; FZ=0; HX=0; KW=0; PH=0;
+ SC=0.394815; ST=0; TS=0; UL=0; ISC=; MB=0.000010
 X-IBM-SpamModules-Versions: BY=3.00011710; HX=3.00000242; KW=3.00000007;
- PH=3.00000004; SC=3.00000287; SDB=6.01256143; UDB=6.00663675; IPR=6.01037810; 
- MB=3.00028452; MTD=3.00000008; XFM=3.00000015; UTC=2019-09-03 14:31:55
+ PH=3.00000004; SC=3.00000287; SDB=6.01256174; UDB=6.00663694; IPR=6.01037842; 
+ MB=3.00028453; MTD=3.00000008; XFM=3.00000015; UTC=2019-09-03 16:06:34
 X-IBM-AV-DETECTION: SAVI=unsuspicious REMOTE=unsuspicious XFE=unused
-X-IBM-AV-VERSION: SAVI=2019-09-03 12:38:33 - 6.00010364
-x-cbparentid: 19090314-1640-0000-0000-0000007E786A
-Message-Id: <OFFDCA2225.5105CBCA-ON0025846A.004FD194-0025846A.004FD2B5@notes.na.collabserv.com>
-X-Proofpoint-UnRewURL: 0 URL was un-rewritten
+X-IBM-AV-VERSION: SAVI=2019-09-03 12:06:18 - 6.00010364
+x-cbparentid: 19090316-8890-0000-0000-00000075FDFF
+Message-Id: <OFAF2370E8.4E8E8CD9-ON0025846A.00585224-0025846A.00587CBB@notes.na.collabserv.com>
+X-Proofpoint-UnRewURL: 3 URL's were un-rewritten
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-09-03_02:, , signatures=0
@@ -84,83 +82,94 @@ List-Post: <mailto:linuxppc-users@lists.ozlabs.org>
 List-Help: <mailto:linuxppc-users-request@lists.ozlabs.org?subject=help>
 List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-users>,
  <mailto:linuxppc-users-request@lists.ozlabs.org?subject=subscribe>
-Cc: linuxppc-users@lists.ozlabs.org, Amit Dave <ADave@ae.ibm.com>
-Content-Type: multipart/mixed; boundary="===============6917490705770583241=="
+Cc: Yasal Akgun <YASAL@tr.ibm.com>, linuxppc-users@lists.ozlabs.org,
+ Amit Dave <ADave@ae.ibm.com>
+Content-Type: multipart/mixed; boundary="===============1835277120469132319=="
 Errors-To: linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org
 Sender: "Linuxppc-users"
  <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 
---===============6917490705770583241==
+--===============1835277120469132319==
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div class=3D"socmaildefaultfont" dir=3D"ltr" style=3D"font-family:Arial, H=
-elvetica, sans-serif;font-size:10pt" ><div dir=3D"ltr" >AIX or Linux ?</div>
-<div dir=3D"ltr" >&nbsp;</div>
-<div dir=3D"ltr" ><div class=3D"socmaildefaultfont" dir=3D"ltr" style=3D"fo=
-nt-family:Arial, Helvetica, sans-serif;font-size:10pt" ><div class=3D"socma=
-ildefaultfont" dir=3D"ltr" style=3D"font-family:Arial, Helvetica, sans-seri=
-f;font-size:10.5pt" ><div class=3D"socmaildefaultfont" dir=3D"ltr" style=3D=
-"font-family:Arial, Helvetica, sans-serif;font-size:10.5pt" ><div class=3D"=
-socmaildefaultfont" dir=3D"ltr" style=3D"font-family:Arial, Helvetica, sans=
--serif;font-size:10.5pt" ><div class=3D"socmaildefaultfont" dir=3D"ltr" sty=
-le=3D"font-family:Arial;font-size:10.5pt" ><div dir=3D"ltr" ><font size=3D"=
-2" face=3D"Default Sans Serif,Verdana,Arial,Helvetica,sans-serif" ><font st=
-yle=3D"font-size: 8pt" size=3D"1" face=3D"arial, helvetica, sans-serif" >Co=
-rdialement, regards,<br><br><font color=3D"#888888" ><b>Thibaud Besson</b><=
-br>Client Technical Specialist / IBM POWER Servers - AIX, Linux<br>IBM Cogn=
-itive Systems</font></font> </font>
-<table width=3D"544" height=3D"90" cellspacing=3D"0" cellpadding=3D"0" >   =
-     <tbody>                <tr>                        <td width=3D"450" v=
-align=3D"TOP" >                        <p><font size=3D"2" face=3D"Default =
-Sans Serif,Verdana,Arial,Helvetica,sans-serif" ><font style=3D"font-size: 8=
-pt" size=3D"1" face=3D"arial, helvetica, sans-serif" ><font color=3D"#466bb=
-0" ><b>Mobile:</b></font> <font>33-(0)6 74 12 80 92 </font><br>            =
-            <font color=3D"#466bb0" ><b>E-mail:</b></font> <a href=3D"mailt=
-o:thibaud.besson@fr.ibm.com" target=3D"_blank"><font color=3D"#5f5f5f" >thi=
-baud.besson@fr.ibm.com</font></a><br>                        <font color=3D=
-"#466bb0" ><font><b>Find me on:</b></font></font> </font> <span style=3D"te=
-xt-decoration: none" > <a href=3D"http://www.linkedin.com/pub/thibaud-besso=
-n/2b/6b4/347" target=3D"_blank"><img name=3D"images1" src=3D"http://www.ibm=
-.com/webaccessories/emailsig/i/LinkedIn.jpg" width=3D"16" height=3D"16" bor=
-der=3D"0" align=3D"BOTTOM" ></a>&nbsp; </span></font></p>                  =
-      </td>                        <td style=3D"width: 420px;" >           =
-             <p style=3D"text-align: right;" ><font size=3D"2" face=3D"Defa=
-ult Sans Serif,Verdana,Arial,Helvetica,sans-serif" ><img name=3D"images3" s=
-rc=3D"http://www.ibm.com/webaccessories/emailsig/i/ibm2.gif" width=3D"87" h=
-eight=3D"30" border=3D"0" align=3D"BOTTOM" ><br>                        <fo=
-nt style=3D"font-size: 8pt" size=3D"1" face=3D"arial, helvetica, sans-serif=
-" >17 Avenue De l'Europe, 92275 Bois Colombes Cedex<br>                    =
-    France</font></font></p>                        </td>                  =
-      <td valign=3D"TOP" ><font size=3D"2" face=3D"Default Sans Serif,Verda=
-na,Arial,Helvetica,sans-serif" >&nbsp;</font></td>                </tr>    =
-    </tbody></table><font size=3D"2" face=3D"Default Sans Serif,Verdana,Ari=
-al,Helvetica,sans-serif" > </font></div></div></div></div></div></div></div>
+<div class=3D"socmaildefaultfont" style=3D"font-family:Arial, Helvetica, sa=
+ns-serif;font-size:10pt" dir=3D"ltr" ><div dir=3D"ltr" >See this competitiv=
+e deck.&nbsp; Might have what you want.&nbsp; Slides 13/14 are most recent.=
+&nbsp; Slide 63,67,68 are p8 but good to show that we have a history of goo=
+d performance and investment.&nbsp; Slides are EnterpriseDB but Postgres wo=
+uld being very similar.
+<table>        <tbody>                <tr>                        <td><span=
+ class=3D"left" style=3D"font-size: 10pt; font-family: Arial; color: rgb(0,=
+ 0, 0);" ><span style=3D"color: rgb(0, 0, 255); font-style: normal;" ><b><a=
+ href=3D"https://ibm.box.com/s/6jcdnp08zg6ixtkhra7fgh663mnp6uy1">https://ib=
+m.box.com/s/6jcdnp08zg6ixtkhra7fgh663mnp6uy1</a></b></span></span></td>    =
+            </tr>        </tbody></table></div>
+<div dir=3D"ltr" >Please advise if have questions.</div>
+<div dir=3D"ltr" ><br>Mark Nellen<br>Program Manager, ISV Benchmark and Per=
+formance<br>IBM STG ISV Business Strategy &amp; Enablement<br>t/l: 912-9870=
+ (720) 430-9870<br>FAX: (720) 430-9870, Cell: 503-515-5102<br>1385 NW Amber=
+glen Parkway<br>Hillsboro, OR 97006</div>
 <div dir=3D"ltr" >&nbsp;</div>
 <div dir=3D"ltr" >&nbsp;</div>
-<blockquote data-history-content-modified=3D"1" dir=3D"ltr" style=3D"border=
--left:solid #aaaaaa 2px; margin-left:5px; padding-left:5px; direction:ltr; =
-margin-right:0px" >----- Message d'origine -----<br>De : "Yasal Akgun" &lt;=
-YASAL@tr.ibm.com&gt;<br>Envoy=C3=A9 par : "Linuxppc-users" &lt;linuxppc-use=
-rs-bounces+thibaud.besson=3Dfr.ibm.com@lists.ozlabs.org&gt;<br>A : linuxppc=
--users@lists.ozlabs.org<br>Cc : Amit Dave &lt;ADave@ae.ibm.com&gt;<br>Objet=
-&nbsp;: [EXTERNAL] [Linuxppc-users] PostgreSQL support on IBM Power Systems=
-<br>Date : mar. 3 sept. 2019 16:30<br>&nbsp;
+<blockquote style=3D"border-left:solid #aaaaaa 2px; margin-left:5px; paddin=
+g-left:5px; direction:ltr; margin-right:0px" dir=3D"ltr" data-history-conte=
+nt-modified=3D"1" >----- Original message -----<br>From: "Ahmed Amer" &lt;a=
+hmed.amer@ae.ibm.com&gt;<br>Sent by: "Linuxppc-users" &lt;linuxppc-users-bo=
+unces+mnellen=3Dus.ibm.com@lists.ozlabs.org&gt;<br>To: "Yasal Akgun" &lt;YA=
+SAL@tr.ibm.com&gt;<br>Cc: linuxppc-users@lists.ozlabs.org, Amit Dave &lt;AD=
+ave@ae.ibm.com&gt;<br>Subject: [EXTERNAL] Re: [Linuxppc-users] PostgreSQL s=
+upport on IBM Power Systems<br>Date: Tue, Sep 3, 2019 7:44 AM<br>&nbsp;
+<p dir=3D"ltr" ><font style=3D"white-space:pre-wrap;font-family: Helvetica =
+Neue, Helvetica, Arial, sans-serif;margin: 1em 0;" >Hey Yasal ,<br>Yes ,we =
+have a one for a client in MEA.<br>Lets sametime to talk tomorrow for furth=
+er clarification.<br><br>Ahmer Amer<br>00971562160827<br><a href=3D"mailto:=
+ahmed.amer@ae.ibm.com" target=3D"_blank">ahmed.amer@ae.ibm.com</a><br>IBM S=
+ystems<br><br>Sent from IBM Verse</font></p><br><br>&nbsp;
+<div dir=3D"ltr" ><div><span><font color=3D"#424282" >Yasal Akgun --- [EXTE=
+RNAL] [Linuxppc-users] PostgreSQL support on IBM Power Systems --- </font><=
+/span></div>
+<div>&nbsp;
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" >   =
+     <tbody>                <tr valign=3D"top" >                        <td=
+ width=3D"1%" style=3D"width: 96px;" ><font color=3D"#5f5f5f" size=3D"2" >F=
+rom:</font></td>                        <td width=3D"100%" style=3D"width: =
+auto;" ><font size=3D"2" >"Yasal Akgun" &lt;YASAL@tr.ibm.com&gt;</font></td=
+>                </tr>                <tr valign=3D"top" >                 =
+       <td width=3D"1%" style=3D"width: 96px;" ><font color=3D"#5f5f5f" siz=
+e=3D"2" >To:</font></td>                        <td width=3D"100%" style=3D=
+"width: auto;" ><font size=3D"2" >linuxppc-users@lists.ozlabs.org</font></t=
+d>                </tr>                <tr valign=3D"top" >                =
+        <td width=3D"1%" style=3D"width: 96px;" ><font color=3D"#5f5f5f" si=
+ze=3D"2" >Cc:</font></td>                        <td width=3D"100%" style=
+=3D"width: auto;" ><font size=3D"2" >"Amit Dave" &lt;ADave@ae.ibm.com&gt;</=
+font></td>                </tr>                <tr valign=3D"top" >        =
+                <td width=3D"1%" style=3D"width: 96px;" ><font color=3D"#5f=
+5f5f" size=3D"2" >Date:</font></td>                        <td width=3D"100=
+%" style=3D"width: auto;" ><font size=3D"2" >Tue, Sep 3, 2019 6:28 PM</font=
+></td>                </tr>                <tr valign=3D"top" >            =
+            <td width=3D"1%" style=3D"width: 96px;" ><font color=3D"#5f5f5f=
+" size=3D"2" >Subject:</font></td>                        <td width=3D"100%=
+" style=3D"width: auto;" ><font size=3D"2" >[EXTERNAL] [Linuxppc-users] Pos=
+tgreSQL support on IBM Power Systems</font></td>                </tr>      =
+  </tbody></table>
+<hr width=3D"100%" size=3D"2" align=3D"left" style=3D"color:#8091A5; " ></d=
+iv>
 <p><font size=3D"2" >Hi,</font><br><br>Do you have references for postgresq=
 l running on Power (LPAR or full-dedicated)?<br><br><br><font size=3D"2" >Y=
 asal Akg=C3=BCn</font><br><br><font size=3D"2" >Technical Sales &amp; Consu=
 ltant for Power &amp; Cognitive Systems<br>Systems, IBM Turkey</font><br><b=
 r><font size=3D"2" >Mobile-1 : 90 555 517 5533<br>Mobile-2 : 90 549 455 482=
-2<br>Work : 90 312 455 4822<br>yasal@tr.ibm.com</font></p>
-<div><font size=3D"2" face=3D"Default Monospace,Courier New,Courier,monospa=
-ce" >_______________________________________________<br>Linuxppc-users mail=
+2<br>Work : 90 312 455 4822<br>yasal@tr.ibm.com</font><br>&nbsp;</p>
+<div><font face=3D"Default Monospace,Courier New,Courier,monospace" size=3D=
+"2" >_______________________________________________<br>Linuxppc-users mail=
 ing list<br>Linuxppc-users@lists.ozlabs.org<br><a href=3D"https://lists.ozl=
 abs.org/listinfo/linuxppc-users" target=3D"_blank">https://lists.ozlabs.org=
-/listinfo/linuxppc-users</a>&nbsp;</font></div></blockquote>
+/listinfo/linuxppc-users</a>&nbsp;</font></div></div></blockquote>
 <div dir=3D"ltr" >&nbsp;</div></div><BR>
 
 
---===============6917490705770583241==
+--===============1835277120469132319==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -171,4 +180,4 @@ Linuxppc-users mailing list
 Linuxppc-users@lists.ozlabs.org
 https://lists.ozlabs.org/listinfo/linuxppc-users
 
---===============6917490705770583241==--
+--===============1835277120469132319==--

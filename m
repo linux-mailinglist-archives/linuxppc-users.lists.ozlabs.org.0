@@ -1,87 +1,77 @@
 Return-Path: <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 X-Original-To: lists+linuxppc-users@lfdr.de
 Delivered-To: lists+linuxppc-users@lfdr.de
-Received: from lists.ozlabs.org (lists.ozlabs.org [203.11.71.2])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78531A798E
-	for <lists+linuxppc-users@lfdr.de>; Wed,  4 Sep 2019 06:08:45 +0200 (CEST)
+Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50E9AA7A1D
+	for <lists+linuxppc-users@lfdr.de>; Wed,  4 Sep 2019 06:42:35 +0200 (CEST)
 Received: from bilbo.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
-	by lists.ozlabs.org (Postfix) with ESMTP id 46NVgG6XxGzDqrN
-	for <lists+linuxppc-users@lfdr.de>; Wed,  4 Sep 2019 14:08:42 +1000 (AEST)
+	by lists.ozlabs.org (Postfix) with ESMTP id 46NWQJ2KM6zDqt3
+	for <lists+linuxppc-users@lfdr.de>; Wed,  4 Sep 2019 14:42:32 +1000 (AEST)
 X-Original-To: linuxppc-users@lists.ozlabs.org
 Delivered-To: linuxppc-users@lists.ozlabs.org
 Authentication-Results: lists.ozlabs.org;
- spf=pass (mailfrom) smtp.mailfrom=linux.ibm.com
- (client-ip=148.163.158.5; helo=mx0a-001b2d01.pphosted.com;
- envelope-from=daniel@linux.ibm.com; receiver=<UNKNOWN>)
+ spf=pass (mailfrom) smtp.mailfrom=tieto.com
+ (client-ip=131.207.176.19; helo=ebb09.tieto.com;
+ envelope-from=tommi.sihvo@tieto.com; receiver=<UNKNOWN>)
 Authentication-Results: lists.ozlabs.org;
- dmarc=none (p=none dis=none) header.from=linux.ibm.com
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
+ dmarc=pass (p=none dis=none) header.from=tieto.com
+X-Greylist: delayed 909 seconds by postgrey-1.36 at bilbo;
+ Wed, 04 Sep 2019 14:42:15 AEST
+Received: from ebb09.tieto.com (ebb09.tieto.com [131.207.176.19])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by lists.ozlabs.org (Postfix) with ESMTPS id 46NVfv5rT5zDqV6
- for <linuxppc-users@lists.ozlabs.org>; Wed,  4 Sep 2019 14:08:16 +1000 (AEST)
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x843vpmM029833
- for <linuxppc-users@lists.ozlabs.org>; Wed, 4 Sep 2019 00:08:13 -0400
-Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
- by mx0b-001b2d01.pphosted.com with ESMTP id 2ut2c5n83f-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <linuxppc-users@lists.ozlabs.org>; Wed, 04 Sep 2019 00:08:13 -0400
-Received: from localhost
- by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <linuxppc-users@lists.ozlabs.org> from <daniel@linux.ibm.com>;
- Wed, 4 Sep 2019 05:08:11 +0100
-Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
- by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Wed, 4 Sep 2019 05:08:10 +0100
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
- [9.149.105.62])
- by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- x84487mf36765940
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 4 Sep 2019 04:08:07 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 0297EAE055;
- Wed,  4 Sep 2019 04:08:07 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A5E03AE04D;
- Wed,  4 Sep 2019 04:08:06 +0000 (GMT)
-Received: from ozlabs.au.ibm.com (unknown [9.192.253.14])
- by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Wed,  4 Sep 2019 04:08:06 +0000 (GMT)
-Received: from volution.fritz.box (haven.au.ibm.com [9.192.254.114])
- (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ozlabs.au.ibm.com (Postfix) with ESMTPSA id 9E058A0147;
- Wed,  4 Sep 2019 14:08:03 +1000 (AEST)
-Date: Wed, 4 Sep 2019 14:08:01 +1000
-From: Daniel Black <daniel@linux.ibm.com>
-To: Toshaan Bharvani | VanTosh <toshaan@vantosh.com>,
- linuxppc-users@lists.ozlabs.org, "Yasal Akgun" <YASAL@tr.ibm.com>
-In-Reply-To: <a748041b-1eb5-741c-b7e7-41a0e43d0af0@vantosh.com>
+ by lists.ozlabs.org (Postfix) with ESMTPS id 46NWPz4v9vzDqkk
+ for <linuxppc-users@lists.ozlabs.org>; Wed,  4 Sep 2019 14:42:15 +1000 (AEST)
+X-AuditID: 83cfb013-f0fff70000003ada-8a-5d6f3d1384d2
+Received: from C105S135VM016.eu.tieto.com ( [10.34.8.54])
+ (using TLS with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ by ebb09.tieto.com (SMTP Mailer) with SMTP id 65.7C.15066.31D3F6D5;
+ Wed,  4 Sep 2019 07:26:59 +0300 (EEST)
+Received: from C105S135VM023.eu.tieto.com (10.34.8.119) by
+ C105S135VM016.eu.tieto.com (10.34.8.54) with Microsoft SMTP Server (TLS) id
+ 15.0.1473.3; Wed, 4 Sep 2019 07:26:59 +0300
+Received: from C105S135VM023.eu.tieto.com ([::1]) by
+ C105S135VM023.eu.tieto.com ([fe80::4478:ea36:826:fa9e%19]) with mapi id
+ 15.00.1473.003; Wed, 4 Sep 2019 07:26:59 +0300
+From: <Tommi.Sihvo@tieto.com>
+To: <toshaan@vantosh.com>, <linuxppc-users@lists.ozlabs.org>
+Thread-Topic: [Linuxppc-users] PostgreSQL support on IBM Power Systems
+Thread-Index: AQHVYmJc3VKyACcFNkO7y/D9vXulM6cZ59wAgAEFWQA=
+Date: Wed, 4 Sep 2019 04:26:59 +0000
+Message-ID: <612F7D89-0BED-4AF5-8CFA-ADC2A554D9B4@tieto.com>
 References: <OFAE7466DE.11482CBD-ON00258465.004651E8-43258465.00469545@notes.na.collabserv.com>
  <a748041b-1eb5-741c-b7e7-41a0e43d0af0@vantosh.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+In-Reply-To: <a748041b-1eb5-741c-b7e7-41a0e43d0af0@vantosh.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Microsoft-MacOutlook/10.10.d.190811
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.32.112.246]
+Content-ID: <7C39C4B95AC94847A26B9D7638FB8BA6@tieto.com>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19090404-0020-0000-0000-0000036766FB
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19090404-0021-0000-0000-000021BCD395
-Message-Id: <20190904140801.1502960a@volution.fritz.box>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-09-03_05:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 suspectscore=2 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=991 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1906280000 definitions=main-1909040041
+X-Brightmail-Tracker: H4sIAAAAAAAAA11UfUwTZxzOez3w6Prq0VJ4qdTRE10cKjgNKUymZIiNbonJwrK4VD3K2V4o
+ d3h3VTDGdMEQhyFUQ9R1UxiDxRGIG2bTqdFZpwkagl+Z2ZI5dWQBvzDzg6jT7L2PwuE/zdPn
+ eZ/f87y/uxxlsd9Kc1G8oHCSwIaZVCtpZaiiBY5S0V/45aEc7+mRc6S3MX7EspzwDe3/GvjG
+ Rl4Qa4i11qXVXJjfzEkF722whl4dbSXrvnXW9/fdmxYFNzOaQRqF6CWo6ZtWQsV2OkagwV8W
+ NwMrxj8BNN59NVX/cxigg39d006l0m70sOMEqeIMeilq//mqhh30CrSn80SKzlegBztHCR2X
+ oMvXB7UzJJ2HXjx+nqpiiL2xnkdAD2gDqOXyNU1Io5ehI7890syAzkTjF3o1bKGz0B/D7YRe
+ m0ZdJ4csOnai0b9facFOugB9dqPDODMfDV4fBjouRD92nyJ17EF/tu/GPIVnzkOHjxfo473o
+ WfPRFB17UNuuW9P0nulo4IthMgay46YW8Ul33OSOm9xxk7sDpPSAGVxVVWHxQoXnFHFhQKzt
+ B/hJNg597zgGdra9nwA0BRgb/HS26LensJvlhtoEqKEIxgk9jYLfPr1KrG4IsXJovRQJczKT
+ AY8X4JNwgq6KhGsYF9zmxaxjghW4LXKYU/Crw8yCTfl4UNaEJkfkOj7AixF5fUQKJwCiLHhs
+ 5ckwHlvNNmzlJFEPS4CZFMlkwd4I9tNBVuFqOK6Ok5LqFopiELxUjJPTJS7I1W/kw0pSxr5/
+ n6o+s6KVdcP66VjINAumvh448g6e6DLLr1cmqLQECFI23Hvfu+o65Dq2VuaDRrQDCuqSbElW
+ i82GWxdj0p4kTZFu+NYatVFSmhp3AXwOqNjogU4LNdDThX9/PdDdabGTgihwriw4phagVWso
+ Ikxc35UJ2/7DM2eYBLWGKwd+5MYGp4mfbOLKhQNSjd+ebVKnlrkDAvh9ccB+NdWGPw6Tt7bD
+ i0WYfMMgtUsjeFp7PAZnunMOBCtxktNQXk8J4lcwA/IttepyFVYxL/eTgKAu12CN5e7yC+py
+ DXLKcrev05ZrSFOTXFFAne8jnxy82eU+c3bVmdYHuaHHc1b7+1vyo3kvcw+Jgb7K0h3fRfd9
+ 9cHtvOxKz7l53vvjqy/OH8v8uKR398M5ZRUtVlh9pbwowPqK2/M/XJE+dOefVdt9FbNKX8ai
+ SnpZU4mtvFm83/TD3sGxNzeu3HSb9JXNnb12A/+88G7fjd/5HacYUg6xi962SDL7P3cAEat0
+ BQAA
 Subject: Re: [Linuxppc-users] PostgreSQL support on IBM Power Systems
 X-BeenThere: linuxppc-users@lists.ozlabs.org
 X-Mailman-Version: 2.1.29
@@ -95,43 +85,47 @@ List-Post: <mailto:linuxppc-users@lists.ozlabs.org>
 List-Help: <mailto:linuxppc-users-request@lists.ozlabs.org?subject=help>
 List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-users>,
  <mailto:linuxppc-users-request@lists.ozlabs.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org
 Sender: "Linuxppc-users"
  <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 
-On Tue, 3 Sep 2019 17:51:34 +0200
-Toshaan Bharvani | VanTosh <toshaan@vantosh.com> wrote:
-
-> Yasal,
-> 
-> 
-> On 29/08/2019 14:50, Yasal Akgun wrote:
-> > Hi,
-> > 
-> > Do you have references for postgresql running on Power (LPAR or
-> > full-dedicated)?  
-> 
-> We have multiple instances of PostgreSQL v10 and v11, all on Linux ppc64
-> and ppc64le. We run this for multiple of our customers.
-> All are running in Linux KVM Qemu virtual machines.
-> We also have x86_64 to compare with
-
-
-Nice!
-
-A while ago was helping someone out with a potential customer that showed a CPU large usage in postgresql's PinBuffer function but never really got to the bottom of it without a reproducible load with easy access (and whether this was general postgresql tuning problem).
-
-So while you have access to multiple instances, are there Postgresql functions that show a higher CPU usage in POWER compared to x86 that I could look optimizing (ahead of potential clients asking)? If so can you show a test case to show it?
-
-Performance data gather with:
-
-perf record -g ; perf report -g --no-children --stdio
-
-Coincidently I'm meeting with 2 postgresql developers next week where I could discuss improvements.
-
-_______________________________________________
-Linuxppc-users mailing list
-Linuxppc-users@lists.ozlabs.org
-https://lists.ozlabs.org/listinfo/linuxppc-users
+SGksDQoNCldlIGFyZSBydW5uaW5nIHF1aXRlIG1hbnkgRURCIHYuMTAgY2x1c3RlcnMgKGR1YWwg
+c2l0ZSAmIHdpdGggd2l0bmVzcyBub2RlIGNvbmZpZ3VyYXRpb24pIG9uIHRvcCBvZiBMaW51eCBv
+biBQb3dlciAoUkhFTCA3LjZMRSkgJiBQb3dlcjg7IGFuZCB3ZSBoYXZlIGFjdHVhbGx5IGF1dG9t
+YXRlZCB0aGUgZGVwbG95bWVudCAmIEVEQiBiYXNpYyBiaW5hcnkgJiBjb25maWcgc2V0dXAgKFBv
+d2VyVkMganNvbiBSRVNUICsgQlNBIHBvc3Qtc2NyaXB0KSwgc28gc2V0dGluZyB1cCBuZXcgZW52
+aXJvbm1lbnRzIHRha2VzIG9ubHkgYSBtb21lbnQuLg0KDQpDdXN0b21lcnMgaGF2ZSBiZWVuIHJl
+YWxseSBzYXRpc2ZpZWQsIG9uZSBpcyBjb25zb2xpZGF0aW5nIGFsbCB0aGVpciBlZGIgZGF0YWJh
+c2VzIG9uIHRoaXMgZW52aXJvbm1lbnQgYmFzZWQgb2YgZXhwZXJpZW5jZSB0aGV5IGFyZSBoYXZp
+bmcgd2l0aCB0aGUgc2V0dXAuDQoNCldlIGFyZSBhbHNvIGxvb2tpbmcgY2FuZGlkYXRlIGN1c3Rv
+bWVycyBmb3IgbWlncmF0aW5nIHNvbWUgT3JhY2xlIHg4NiBlbnZpcm9ubWVudHMgIGludG8gTGlu
+dXggb24gUG93ZXIgRURCLg0KV291bGQgYmUgYSBuaWNlIHByb2plY3QgdG8gdHJ5LCBidXQgY291
+cGxlIG9mIGNhc2VzIGhhdmUgZW5kZWQgdXAgZGVhZCBiZWNhdXNlIHRoZSAzcmQgcGFydHkgYXBw
+bGljYXRpb24gdXNpbmcgdGhlIGRhdGFiYXNlIHN1cHBvcnRzIG9ubHkgT3JhY2xlLi4gKCANCg0K
+QnIsDQp0b21taQ0KIA0KDQrvu79PbiAwMy8wOS8yMDE5LCAxOS41OCwgIkxpbnV4cHBjLXVzZXJz
+IG9uIGJlaGFsZiBvZiBUb3NoYWFuIEJoYXJ2YW5pIHwgVmFuVG9zaCIgPGxpbnV4cHBjLXVzZXJz
+LWJvdW5jZXMrdG9tbWkuc2lodm89dGlldG8uY29tQGxpc3RzLm96bGFicy5vcmcgb24gYmVoYWxm
+IG9mIHRvc2hhYW5AdmFudG9zaC5jb20+IHdyb3RlOg0KDQogICAgWWFzYWwsDQogICAgDQogICAg
+DQogICAgT24gMjkvMDgvMjAxOSAxNDo1MCwgWWFzYWwgQWtndW4gd3JvdGU6DQogICAgPiBIaSwN
+CiAgICA+IA0KICAgID4gRG8geW91IGhhdmUgcmVmZXJlbmNlcyBmb3IgcG9zdGdyZXNxbCBydW5u
+aW5nIG9uIFBvd2VyIChMUEFSIG9yDQogICAgPiBmdWxsLWRlZGljYXRlZCk/DQogICAgDQogICAg
+V2UgaGF2ZSBtdWx0aXBsZSBpbnN0YW5jZXMgb2YgUG9zdGdyZVNRTCB2MTAgYW5kIHYxMSwgYWxs
+IG9uIExpbnV4IHBwYzY0DQogICAgYW5kIHBwYzY0bGUuIFdlIHJ1biB0aGlzIGZvciBtdWx0aXBs
+ZSBvZiBvdXIgY3VzdG9tZXJzLg0KICAgIEFsbCBhcmUgcnVubmluZyBpbiBMaW51eCBLVk0gUWVt
+dSB2aXJ0dWFsIG1hY2hpbmVzLg0KICAgIFdlIGFsc28gaGF2ZSB4ODZfNjQgdG8gY29tcGFyZSB3
+aXRoDQogICAgDQogICAgDQogICAgPiANCiAgICA+IA0KICAgID4gWWFzYWwgQWtnw7xuDQogICAg
+PiANCiAgICA+IFRlY2huaWNhbCBTYWxlcyAmIENvbnN1bHRhbnQgZm9yIFBvd2VyICYgQ29nbml0
+aXZlIFN5c3RlbXMNCiAgICA+IFN5c3RlbXMsIElCTSBUdXJrZXkNCiAgICA+IA0KICAgID4gTW9i
+aWxlLTEgOiA5MCA1NTUgNTE3IDU1MzMNCiAgICA+IE1vYmlsZS0yIDogOTAgNTQ5IDQ1NSA0ODIy
+DQogICAgPiBXb3JrIDogOTAgMzEyIDQ1NSA0ODIyDQogICAgPiB5YXNhbEB0ci5pYm0uY29tDQog
+ICAgDQogICAgUmVnYXJkcywNCiAgICBUb3NoYWFuLg0KICAgIA0KICAgIC0tIA0KICAgIC0tDQog
+ICAgVG9zaGFhbiBCaGFydmFuaQ0KICAgICszMi0oMCk0NzYtNjYuNzAuNTUNCiAgICB0b3NoYWFu
+QHZhbnRvc2guY29tDQogICAgQHRvc2h5d29zaHkNCiAgICAtLQ0KICAgIF9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQogICAgTGludXhwcGMtdXNlcnMgbWFp
+bGluZyBsaXN0DQogICAgTGludXhwcGMtdXNlcnNAbGlzdHMub3psYWJzLm9yZw0KICAgIGh0dHBz
+Oi8vbGlzdHMub3psYWJzLm9yZy9saXN0aW5mby9saW51eHBwYy11c2Vycw0KICAgIA0KDQpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eHBwYy11c2Vy
+cyBtYWlsaW5nIGxpc3QKTGludXhwcGMtdXNlcnNAbGlzdHMub3psYWJzLm9yZwpodHRwczovL2xp
+c3RzLm96bGFicy5vcmcvbGlzdGluZm8vbGludXhwcGMtdXNlcnMK

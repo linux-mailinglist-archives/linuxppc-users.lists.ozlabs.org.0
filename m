@@ -1,88 +1,41 @@
 Return-Path: <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 X-Original-To: lists+linuxppc-users@lfdr.de
 Delivered-To: lists+linuxppc-users@lfdr.de
-Received: from lists.ozlabs.org (lists.ozlabs.org [203.11.71.2])
-	by mail.lfdr.de (Postfix) with ESMTPS id 019B526948C
-	for <lists+linuxppc-users@lfdr.de>; Mon, 14 Sep 2020 20:12:58 +0200 (CEST)
-Received: from bilbo.ozlabs.org (lists.ozlabs.org [IPv6:2401:3900:2:1::3])
-	by lists.ozlabs.org (Postfix) with ESMTP id 4Bqvbq2wyZzDqPj
-	for <lists+linuxppc-users@lfdr.de>; Tue, 15 Sep 2020 04:12:55 +1000 (AEST)
+Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2404:9400:2:0:216:3eff:fee1:b9f1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FF314A31DB
+	for <lists+linuxppc-users@lfdr.de>; Sat, 29 Jan 2022 21:34:44 +0100 (CET)
+Received: from boromir.ozlabs.org (localhost [IPv6:::1])
+	by lists.ozlabs.org (Postfix) with ESMTP id 4JmQzk36cbz3bcc
+	for <lists+linuxppc-users@lfdr.de>; Sun, 30 Jan 2022 07:34:42 +1100 (AEDT)
 X-Original-To: linuxppc-users@lists.ozlabs.org
 Delivered-To: linuxppc-users@lists.ozlabs.org
 Authentication-Results: lists.ozlabs.org; spf=pass (sender SPF authorized)
- smtp.mailfrom=us.ibm.com (client-ip=148.163.158.5;
- helo=mx0a-001b2d01.pphosted.com; envelope-from=cel@us.ibm.com;
- receiver=<UNKNOWN>)
-Authentication-Results: lists.ozlabs.org;
- dmarc=pass (p=none dis=none) header.from=us.ibm.com
-Authentication-Results: lists.ozlabs.org; dkim=pass (2048-bit key;
- unprotected) header.d=ibm.com header.i=@ibm.com header.a=rsa-sha256
- header.s=pp1 header.b=pRn/GGli; dkim-atps=neutral
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ smtp.mailfrom=molgen.mpg.de (client-ip=141.14.17.11; helo=mx1.molgen.mpg.de;
+ envelope-from=pmenzel@molgen.mpg.de; receiver=<UNKNOWN>)
+X-Greylist: delayed 528 seconds by postgrey-1.36 at boromir;
+ Sun, 30 Jan 2022 07:34:33 AEDT
+Received: from mx1.molgen.mpg.de (mx3.molgen.mpg.de [141.14.17.11])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by lists.ozlabs.org (Postfix) with ESMTPS id 4BqvbP2zy2zDqPW
- for <linuxppc-users@lists.ozlabs.org>; Tue, 15 Sep 2020 04:12:30 +1000 (AEST)
-Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08EI3VT8030687
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 14:12:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=message-id : subject :
- from : to : date : content-type : mime-version :
- content-transfer-encoding; s=pp1;
- bh=qMOhjVqeugJ4/IYl2R7EsrffJAjJMnBKgavrt1Qurok=;
- b=pRn/GGliN9Up2mygzkGopiNW3mLA6lSvBCib/H9ToqBwTdL3bzXwnANIF1y7O5qmwXIh
- fYdoGK+14vR3P7w0+rSFF6MjDiB+Lm8iz4yXE7RMMjZb2f5zMNF8Vov1etrYV9boB1G7
- XIQ6iCM1MIWghZ9k68yOrl06OMYimhTH+twfLWsmubeQk8KtqHkZx5LnwKM1wL+JbLeF
- qeBRqUYclOgh1L7S4HG3ZlNRg9WFzgdxmUQka/ktLIvmzeg0BraLAC8l4177nV6saCiQ
- rJt/2WszqgkfUjx1GXclev1n89fofwI+VmcahzbZS++orYKikRiI+4aRI27BgOrjbvMK PQ== 
-Received: from ppma03dal.us.ibm.com (b.bd.3ea9.ip4.static.sl-reverse.com
- [169.62.189.11])
- by mx0b-001b2d01.pphosted.com with ESMTP id 33jcs6sa47-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 14:12:26 -0400
-Received: from pps.filterd (ppma03dal.us.ibm.com [127.0.0.1])
- by ppma03dal.us.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 08EI2VsQ027894
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 18:12:25 GMT
-Received: from b03cxnp08025.gho.boulder.ibm.com
- (b03cxnp08025.gho.boulder.ibm.com [9.17.130.17])
- by ppma03dal.us.ibm.com with ESMTP id 33gny96616-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 18:12:25 +0000
-Received: from b03ledav002.gho.boulder.ibm.com
- (b03ledav002.gho.boulder.ibm.com [9.17.130.233])
- by b03cxnp08025.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 08EICLnP40501634
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 18:12:21 GMT
-Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 7F27313604F
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 18:12:24 +0000 (GMT)
-Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 023E1136051
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 18:12:23 +0000 (GMT)
-Received: from sig-9-65-192-58.ibm.com (unknown [9.65.192.58])
- by b03ledav002.gho.boulder.ibm.com (Postfix) with ESMTP
- for <linuxppc-users@lists.ozlabs.org>; Mon, 14 Sep 2020 18:12:23 +0000 (GMT)
-Message-ID: <880bba138d34131ea6085287e65445866141ab7a.camel@us.ibm.com>
-From: Carl Love <cel@us.ibm.com>
+ by lists.ozlabs.org (Postfix) with ESMTPS id 4JmQzY3MwTz2ymv
+ for <linuxppc-users@lists.ozlabs.org>; Sun, 30 Jan 2022 07:34:33 +1100 (AEDT)
+Received: from [10.59.106.37] (unknown [77.235.169.38])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: pmenzel)
+ by mx.molgen.mpg.de (Postfix) with ESMTPSA id A569E61EA1926;
+ Sat, 29 Jan 2022 21:22:41 +0100 (CET)
+Message-ID: <bcda57e8-50d2-c2be-de9d-8ed97effb783@molgen.mpg.de>
+Date: Sat, 29 Jan 2022 21:22:37 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.1
+Content-Language: en-US
+From: Paul Menzel <pmenzel@molgen.mpg.de>
 To: linuxppc-users@lists.ozlabs.org
-Date: Mon, 14 Sep 2020 11:12:22 -0700
-X-Mailer: Evolution 3.28.5 (3.28.5-5.el7) 
-Mime-Version: 1.0
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-09-14_07:2020-09-14,
- 2020-09-14 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 lowpriorityscore=0 clxscore=1011 spamscore=0 suspectscore=5
- mlxscore=0 bulkscore=0 phishscore=0 impostorscore=0 adultscore=0
- mlxlogscore=458 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2009140142
-Subject: [Linuxppc-users] Lenovo P53 question
+Subject: [Linuxppc-users] Linux: raid6 benchmark: using intx1 recovery
+ algorithm
 X-BeenThere: linuxppc-users@lists.ozlabs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,27 +48,77 @@ List-Post: <mailto:linuxppc-users@lists.ozlabs.org>
 List-Help: <mailto:linuxppc-users-request@lists.ozlabs.org?subject=help>
 List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-users>,
  <mailto:linuxppc-users-request@lists.ozlabs.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org
 Sender: "Linuxppc-users"
  <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 
-Everyone:
-
-If you are not using a Lenovo P53 laptop with Linux please ignore this
-message.
-
-If you are running Linux on a Lenovo P53 laptop, I am wondering if you
-have the Lenovo Thunderbolt 3 Gen2 workstation docking station?  I am
-specifically interested in knowing if the docking station works with
-Linux.  
-
-Thanks.
-
-                   Carl Love
-
-_______________________________________________
-Linuxppc-users mailing list
-Linuxppc-users@lists.ozlabs.org
-https://lists.ozlabs.org/listinfo/linuxppc-users
+RGVhciBQUEMgZm9sa3MsCgoKTGludXggaGFzIGEgcmFpZDYgYmVuY2htYXJrIChgUkFJRDZfUFFf
+QkVOQ0hNQVJLYCkuIE9uIHRoZSBQT1dFUjggSUJNIApTODIyTEMsIExpbnV4IGxvZ3MgdGhlIHJl
+c3VsdHMgYmVsb3c6CgpgYGAKWyAgICAwLjAwMDAwMF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5l
+bDogTGludXggdmVyc2lvbiA1LjE3LjAtcmMxKyAKKHBtZW56ZWxAZWJiZC5tb2xnZW4ubXBnLmRl
+KSAoVWJ1bnR1IGNsYW5nIHZlcnNpb24gMTMuMC4wLTIsIExMRCAxMy4wLjApIAojMSBTTVAgV2Vk
+IEphbiAyNiAyMzo0MToyMiBDRVQgMjAyMgpb4oCmXQpbICAgIDEuMzgxMzUwXSBlYmJkLm1vbGdl
+bi5tcGcuZGUga2VybmVsOiByYWlkNjogdnBlcm14b3I4IGdlbigpIDIzMDMzIE1CL3MKWyAgICAx
+LjQ0OTQ0NF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IHZwZXJteG9yNCBnZW4o
+KSAyMjk2MiBNQi9zClsgICAgMS41MTc0ODddIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
+aWQ2OiB2cGVybXhvcjIgZ2VuKCkgMTgwMDUgTUIvcwpbICAgIDEuNTg1NjE5XSBlYmJkLm1vbGdl
+bi5tcGcuZGUga2VybmVsOiByYWlkNjogdnBlcm14b3IxIGdlbigpICA3MDM3IE1CL3MKWyAgICAx
+LjY1Mzc3MF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4OCBnZW4o
+KSAgNjk0OSBNQi9zClsgICAgMS43MjE4NDFdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
+aWQ2OiBhbHRpdmVjeDQgZ2VuKCkgIDY0NTcgTUIvcwpbICAgIDEuNzg5OTY1XSBlYmJkLm1vbGdl
+bi5tcGcuZGUga2VybmVsOiByYWlkNjogYWx0aXZlY3gyIGdlbigpICA2MTY5IE1CL3MKWyAgICAx
+Ljg1ODAzNF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4MSBnZW4o
+KSAgOTMwNCBNQi9zClsgICAgMS45MjYwNjRdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
+aWQ2OiBpbnQ2NHg4ICBnZW4oKSAgMzgyNiBNQi9zClsgICAgMS45OTQxMjZdIGViYmQubW9sZ2Vu
+Lm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg0ICBnZW4oKSAgNDk2MiBNQi9zClsgICAgMi4w
+NjIyMzJdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHgyICBnZW4oKSAg
+Mzk3MiBNQi9zClsgICAgMi4xMzAyMjRdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2
+OiBpbnQ2NHgxICBnZW4oKSAgMjkwNiBNQi9zClsgICAgMi4xMzAzNDNdIGViYmQubW9sZ2VuLm1w
+Zy5kZSBrZXJuZWw6IHJhaWQ2OiB1c2luZyBhbGdvcml0aG0gCnZwZXJteG9yOCBnZW4oKSAyMzAz
+MyBNQi9zClsgICAgMi4xMzA0MThdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiB1
+c2luZyBpbnR4MSByZWNvdmVyeSAKYWxnb3JpdGhtCmBgYAoKRm9yIHRoZSByZWNvdmVyeSBhbGdv
+cml0aG0sIGl0IGNob29zZXMgaW50eDEuIERvIHlvdSBrbm93IHdoeT8gSXTigJlzIG5vdCAKdGhl
+IGhpZ2hlc3QgbnVtYmVyIGZyb20gdGhlIHJlc3VsdHMgYWJvdmUuIEFsc28gdGhlIHN0cmluZyBg
+aW50eDFgIGRvZXMgCm5vdCBhcHBlYXIgaW4gdGhlIGJlbmNobWFyayBsaW5lcywgb25seSBgaW50
+NjR4MWAuICBOb3RlLCBjb21taXQgCjM4NjQwYzQ4MDkgKGxpYi9yYWlkNjogc2tpcCBiZW5jaG1h
+cmsgb2Ygbm9uLWNob3NlbiB4b3Jfc3luZHJvbWUgCmZ1bmN0aW9ucykgc2tpcHMgc29tZSB4b3Io
+KSBiZW5jaG1hcmtzLgoKCktpbmQgcmVnYXJkcywKClBhdWwKCgpQUzogVWJ1bnR14oCZcyA1LjEz
+LjAtMjctZ2VuZXJpYyBhbHNvIGludHgxIGlzIGNob3NlbiBhcyByZWNvdmVyeSAKYWxnb3JpdGht
+LiBCdXQgdGhlIGJlbmNobWFyayByZXN1bHQgaXMgMjgwMzggTUIvcyBvdmVyIExpbnV4IDUuMTct
+cmMx4oCZcyAKMjMwMzMgTUIvcywgYW5kIHRoZSBudW1iZXIgMTk4MjggTUIvcyBzaG93biBpbiB0
+aGUgcmVzdWx0IGlzIG5vdCBzaG93biAKaW4gdGhlIGxpbmVzIGFib3ZlLiBWZXJ5IHN0cmFuZ2Uu
+CgpbICAgIDAuMDAwMDAwXSBmbHVnaGFmZW5iZXJsaW5icmFuZGVuYnVyZ3dpbGx5YnJhbmR0Lm1v
+bGdlbi5tcGcuZGUgCmtlcm5lbDogTGludXggdmVyc2lvbiA1LjEzLjAtMjctZ2VuZXJpYyAoYnVp
+bGRkQGJvczAyLXBwYzY0ZWwtMDE3KSAoZ2NjIAooVWJ1bnR1IDExLjIuMC03dWJ1bnR1MikgMTEu
+Mi4wLCBHTlUgbGQgKEdOVSBCaW51dGlscyBmb3IgVWJ1bnR1KSAyLjM3KSAKIzI5LVVidW50dSBT
+TVAgV2VkIEphbiAxMiAxNzozNjo1MCBVVEMgMjAyMiAoVWJ1bnR1IDUuMTMuMC0yNy4yOS1nZW5l
+cmljIAo1LjEzLjE5KQpb4oCmXQpbICAgIDIuNDM5ODY4XSBlYmJkLm1vbGdlbi5tcGcuZGUga2Vy
+bmVsOiByYWlkNjogdnBlcm14b3I4IGdlbigpIDI4MDM4IE1CL3MKWyAgICAyLjQ4Nzg2M10gZWJi
+ZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IHZwZXJteG9yNCBnZW4oKSAyNzE2NiBNQi9z
+ClsgICAgMi41MzU4NzVdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiB2cGVybXhv
+cjIgZ2VuKCkgMjEyODQgTUIvcwpbICAgIDIuNTgzODgwXSBlYmJkLm1vbGdlbi5tcGcuZGUga2Vy
+bmVsOiByYWlkNjogdnBlcm14b3IxIGdlbigpIDE0NjM5IE1CL3MKWyAgICAyLjYzMTg3MV0gZWJi
+ZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4OCBnZW4oKSAxNDgzOSBNQi9z
+ClsgICAgMi42Nzk4NzRdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBhbHRpdmVj
+eDQgZ2VuKCkgMTczMjMgTUIvcwpbICAgIDIuNzI3ODk3XSBlYmJkLm1vbGdlbi5tcGcuZGUga2Vy
+bmVsOiByYWlkNjogYWx0aXZlY3gyIGdlbigpIDEyMTEyIE1CL3MKWyAgICAyLjc3NTg4OV0gZWJi
+ZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4MSBnZW4oKSAxMTM1MCBNQi9z
+ClsgICAgMi44MjM4NjBdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg4
+ICBnZW4oKSAgNDkyMCBNQi9zClsgICAgMi44NzE5MDhdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJu
+ZWw6IHJhaWQ2OiBpbnQ2NHg4ICB4b3IoKSAgMjk3MyBNQi9zClsgICAgMi45MTk5MDhdIGViYmQu
+bW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg0ICBnZW4oKSAgNTYzMyBNQi9zClsg
+ICAgMi45Njc5MTVdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg0ICB4
+b3IoKSAgMzI0NiBNQi9zClsgICAgMy4wMTU4NjZdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6
+IHJhaWQ2OiBpbnQ2NHgyICBnZW4oKSAgNDk5NSBNQi9zClsgICAgMy4wNjM4NzZdIGViYmQubW9s
+Z2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHgyICB4b3IoKSAgMjUzOCBNQi9zClsgICAg
+My4xMTE4OTZdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHgxICBnZW4o
+KSAgMzk1MCBNQi9zClsgICAgMy4xNTk4NjhdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
+aWQ2OiBpbnQ2NHgxICB4b3IoKSAgMTk1OCBNQi9zClsgICAgMy4xNTk4NzBdIGViYmQubW9sZ2Vu
+Lm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiB1c2luZyBhbGdvcml0aG0gCnZwZXJteG9yOCBnZW4oKSAx
+OTgyOCBNQi9zClsgICAgMy4xNTk4NzFdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2
+OiB1c2luZyBpbnR4MSByZWNvdmVyeSAKYWxnb3JpdGhtCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4cHBjLXVzZXJzIG1haWxpbmcgbGlzdApMaW51
+eHBwYy11c2Vyc0BsaXN0cy5vemxhYnMub3JnCmh0dHBzOi8vbGlzdHMub3psYWJzLm9yZy9saXN0
+aW5mby9saW51eHBwYy11c2Vycwo=

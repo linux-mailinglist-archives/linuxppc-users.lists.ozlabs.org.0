@@ -2,39 +2,77 @@ Return-Path: <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.o
 X-Original-To: lists+linuxppc-users@lfdr.de
 Delivered-To: lists+linuxppc-users@lfdr.de
 Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2404:9400:2:0:216:3eff:fee1:b9f1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FF314A31DB
-	for <lists+linuxppc-users@lfdr.de>; Sat, 29 Jan 2022 21:34:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3AAC4A6036
+	for <lists+linuxppc-users@lfdr.de>; Tue,  1 Feb 2022 16:34:18 +0100 (CET)
 Received: from boromir.ozlabs.org (localhost [IPv6:::1])
-	by lists.ozlabs.org (Postfix) with ESMTP id 4JmQzk36cbz3bcc
-	for <lists+linuxppc-users@lfdr.de>; Sun, 30 Jan 2022 07:34:42 +1100 (AEDT)
+	by lists.ozlabs.org (Postfix) with ESMTP id 4Jp89h4P0tz2xrm
+	for <lists+linuxppc-users@lfdr.de>; Wed,  2 Feb 2022 02:34:16 +1100 (AEDT)
+Authentication-Results: lists.ozlabs.org;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ocbO1/sR;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=iLaTR1bI;
+	dkim-atps=neutral
 X-Original-To: linuxppc-users@lists.ozlabs.org
 Delivered-To: linuxppc-users@lists.ozlabs.org
-Authentication-Results: lists.ozlabs.org; spf=pass (sender SPF authorized)
- smtp.mailfrom=molgen.mpg.de (client-ip=141.14.17.11; helo=mx1.molgen.mpg.de;
- envelope-from=pmenzel@molgen.mpg.de; receiver=<UNKNOWN>)
-X-Greylist: delayed 528 seconds by postgrey-1.36 at boromir;
- Sun, 30 Jan 2022 07:34:33 AEDT
-Received: from mx1.molgen.mpg.de (mx3.molgen.mpg.de [141.14.17.11])
+Authentication-Results: lists.ozlabs.org;
+ spf=pass (sender SPF authorized) smtp.mailfrom=suse.de
+ (client-ip=195.135.220.28; helo=smtp-out1.suse.de;
+ envelope-from=dmueller@suse.de; receiver=<UNKNOWN>)
+Authentication-Results: lists.ozlabs.org; dkim=pass (1024-bit key;
+ unprotected) header.d=suse.de header.i=@suse.de header.a=rsa-sha256
+ header.s=susede2_rsa header.b=ocbO1/sR; 
+ dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
+ header.s=susede2_ed25519 header.b=iLaTR1bI; 
+ dkim-atps=neutral
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by lists.ozlabs.org (Postfix) with ESMTPS id 4JmQzY3MwTz2ymv
- for <linuxppc-users@lists.ozlabs.org>; Sun, 30 Jan 2022 07:34:33 +1100 (AEDT)
-Received: from [10.59.106.37] (unknown [77.235.169.38])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: pmenzel)
- by mx.molgen.mpg.de (Postfix) with ESMTPSA id A569E61EA1926;
- Sat, 29 Jan 2022 21:22:41 +0100 (CET)
-Message-ID: <bcda57e8-50d2-c2be-de9d-8ed97effb783@molgen.mpg.de>
-Date: Sat, 29 Jan 2022 21:22:37 +0100
+ by lists.ozlabs.org (Postfix) with ESMTPS id 4Jp05V0gwQz2xsc
+ for <linuxppc-users@lists.ozlabs.org>; Tue,  1 Feb 2022 20:30:05 +1100 (AEDT)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2CAAC21114;
+ Tue,  1 Feb 2022 09:30:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1643707801; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uzJ9IaZwktVODOrMTmYN4f2QjcibjowW5LwRCfHtnJs=;
+ b=ocbO1/sRt2JfttmRSAK+QnNIhFQZnISwZ6cBR9M/GmeE2V6iTJ2Xgvl02j7xmK3Bh044M0
+ zV3s4SNxn3sItM7YKhiahZFbPX3zKnRQx1dfLaY3cMEmR1sudJmDHocEBySC4HE+yAA055
+ QTOjp2V2wQCPqOJBgCpjC6cSU0V+zik=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1643707801;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uzJ9IaZwktVODOrMTmYN4f2QjcibjowW5LwRCfHtnJs=;
+ b=iLaTR1bIp9V7QZ0fcMGyFOqimwzXZnzgoIMHivQA4JzWxPBCWST9lMnCbj9MkrnTXk9emn
+ dF5XQ2HrVdtz94DA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1821813CF0;
+ Tue,  1 Feb 2022 09:30:01 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id gdraBJn9+GGWcAAAMHmgww
+ (envelope-from <dmueller@suse.de>); Tue, 01 Feb 2022 09:30:01 +0000
+From: Dirk =?ISO-8859-1?Q?M=FCller?= <dmueller@suse.de>
+To: linuxppc-users@lists.ozlabs.org, Paul Menzel <pmenzel@molgen.mpg.de>
+Date: Tue, 01 Feb 2022 10:30:00 +0100
+Message-ID: <2872057.ZOAX1rYKIr@magnolia>
+Organization: SUSE Software Solutions Germany GmbH; GF: Ivo Totev;
+ HRB 36809 (AG =?UTF-8?B?TsO8cm5iZXJnKQ==?=
+In-Reply-To: <bcda57e8-50d2-c2be-de9d-8ed97effb783@molgen.mpg.de>
+References: <bcda57e8-50d2-c2be-de9d-8ed97effb783@molgen.mpg.de>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.1
-Content-Language: en-US
-From: Paul Menzel <pmenzel@molgen.mpg.de>
-To: linuxppc-users@lists.ozlabs.org
-Subject: [Linuxppc-users] Linux: raid6 benchmark: using intx1 recovery
+X-Mailman-Approved-At: Wed, 02 Feb 2022 02:34:07 +1100
+Subject: Re: [Linuxppc-users] Linux: raid6 benchmark: using intx1 recovery
  algorithm
 X-BeenThere: linuxppc-users@lists.ozlabs.org
 X-Mailman-Version: 2.1.29
@@ -48,77 +86,38 @@ List-Post: <mailto:linuxppc-users@lists.ozlabs.org>
 List-Help: <mailto:linuxppc-users-request@lists.ozlabs.org?subject=help>
 List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-users>,
  <mailto:linuxppc-users-request@lists.ozlabs.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org
 Sender: "Linuxppc-users"
  <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 
-RGVhciBQUEMgZm9sa3MsCgoKTGludXggaGFzIGEgcmFpZDYgYmVuY2htYXJrIChgUkFJRDZfUFFf
-QkVOQ0hNQVJLYCkuIE9uIHRoZSBQT1dFUjggSUJNIApTODIyTEMsIExpbnV4IGxvZ3MgdGhlIHJl
-c3VsdHMgYmVsb3c6CgpgYGAKWyAgICAwLjAwMDAwMF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5l
-bDogTGludXggdmVyc2lvbiA1LjE3LjAtcmMxKyAKKHBtZW56ZWxAZWJiZC5tb2xnZW4ubXBnLmRl
-KSAoVWJ1bnR1IGNsYW5nIHZlcnNpb24gMTMuMC4wLTIsIExMRCAxMy4wLjApIAojMSBTTVAgV2Vk
-IEphbiAyNiAyMzo0MToyMiBDRVQgMjAyMgpb4oCmXQpbICAgIDEuMzgxMzUwXSBlYmJkLm1vbGdl
-bi5tcGcuZGUga2VybmVsOiByYWlkNjogdnBlcm14b3I4IGdlbigpIDIzMDMzIE1CL3MKWyAgICAx
-LjQ0OTQ0NF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IHZwZXJteG9yNCBnZW4o
-KSAyMjk2MiBNQi9zClsgICAgMS41MTc0ODddIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
-aWQ2OiB2cGVybXhvcjIgZ2VuKCkgMTgwMDUgTUIvcwpbICAgIDEuNTg1NjE5XSBlYmJkLm1vbGdl
-bi5tcGcuZGUga2VybmVsOiByYWlkNjogdnBlcm14b3IxIGdlbigpICA3MDM3IE1CL3MKWyAgICAx
-LjY1Mzc3MF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4OCBnZW4o
-KSAgNjk0OSBNQi9zClsgICAgMS43MjE4NDFdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
-aWQ2OiBhbHRpdmVjeDQgZ2VuKCkgIDY0NTcgTUIvcwpbICAgIDEuNzg5OTY1XSBlYmJkLm1vbGdl
-bi5tcGcuZGUga2VybmVsOiByYWlkNjogYWx0aXZlY3gyIGdlbigpICA2MTY5IE1CL3MKWyAgICAx
-Ljg1ODAzNF0gZWJiZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4MSBnZW4o
-KSAgOTMwNCBNQi9zClsgICAgMS45MjYwNjRdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
-aWQ2OiBpbnQ2NHg4ICBnZW4oKSAgMzgyNiBNQi9zClsgICAgMS45OTQxMjZdIGViYmQubW9sZ2Vu
-Lm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg0ICBnZW4oKSAgNDk2MiBNQi9zClsgICAgMi4w
-NjIyMzJdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHgyICBnZW4oKSAg
-Mzk3MiBNQi9zClsgICAgMi4xMzAyMjRdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2
-OiBpbnQ2NHgxICBnZW4oKSAgMjkwNiBNQi9zClsgICAgMi4xMzAzNDNdIGViYmQubW9sZ2VuLm1w
-Zy5kZSBrZXJuZWw6IHJhaWQ2OiB1c2luZyBhbGdvcml0aG0gCnZwZXJteG9yOCBnZW4oKSAyMzAz
-MyBNQi9zClsgICAgMi4xMzA0MThdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiB1
-c2luZyBpbnR4MSByZWNvdmVyeSAKYWxnb3JpdGhtCmBgYAoKRm9yIHRoZSByZWNvdmVyeSBhbGdv
-cml0aG0sIGl0IGNob29zZXMgaW50eDEuIERvIHlvdSBrbm93IHdoeT8gSXTigJlzIG5vdCAKdGhl
-IGhpZ2hlc3QgbnVtYmVyIGZyb20gdGhlIHJlc3VsdHMgYWJvdmUuIEFsc28gdGhlIHN0cmluZyBg
-aW50eDFgIGRvZXMgCm5vdCBhcHBlYXIgaW4gdGhlIGJlbmNobWFyayBsaW5lcywgb25seSBgaW50
-NjR4MWAuICBOb3RlLCBjb21taXQgCjM4NjQwYzQ4MDkgKGxpYi9yYWlkNjogc2tpcCBiZW5jaG1h
-cmsgb2Ygbm9uLWNob3NlbiB4b3Jfc3luZHJvbWUgCmZ1bmN0aW9ucykgc2tpcHMgc29tZSB4b3Io
-KSBiZW5jaG1hcmtzLgoKCktpbmQgcmVnYXJkcywKClBhdWwKCgpQUzogVWJ1bnR14oCZcyA1LjEz
-LjAtMjctZ2VuZXJpYyBhbHNvIGludHgxIGlzIGNob3NlbiBhcyByZWNvdmVyeSAKYWxnb3JpdGht
-LiBCdXQgdGhlIGJlbmNobWFyayByZXN1bHQgaXMgMjgwMzggTUIvcyBvdmVyIExpbnV4IDUuMTct
-cmMx4oCZcyAKMjMwMzMgTUIvcywgYW5kIHRoZSBudW1iZXIgMTk4MjggTUIvcyBzaG93biBpbiB0
-aGUgcmVzdWx0IGlzIG5vdCBzaG93biAKaW4gdGhlIGxpbmVzIGFib3ZlLiBWZXJ5IHN0cmFuZ2Uu
-CgpbICAgIDAuMDAwMDAwXSBmbHVnaGFmZW5iZXJsaW5icmFuZGVuYnVyZ3dpbGx5YnJhbmR0Lm1v
-bGdlbi5tcGcuZGUgCmtlcm5lbDogTGludXggdmVyc2lvbiA1LjEzLjAtMjctZ2VuZXJpYyAoYnVp
-bGRkQGJvczAyLXBwYzY0ZWwtMDE3KSAoZ2NjIAooVWJ1bnR1IDExLjIuMC03dWJ1bnR1MikgMTEu
-Mi4wLCBHTlUgbGQgKEdOVSBCaW51dGlscyBmb3IgVWJ1bnR1KSAyLjM3KSAKIzI5LVVidW50dSBT
-TVAgV2VkIEphbiAxMiAxNzozNjo1MCBVVEMgMjAyMiAoVWJ1bnR1IDUuMTMuMC0yNy4yOS1nZW5l
-cmljIAo1LjEzLjE5KQpb4oCmXQpbICAgIDIuNDM5ODY4XSBlYmJkLm1vbGdlbi5tcGcuZGUga2Vy
-bmVsOiByYWlkNjogdnBlcm14b3I4IGdlbigpIDI4MDM4IE1CL3MKWyAgICAyLjQ4Nzg2M10gZWJi
-ZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IHZwZXJteG9yNCBnZW4oKSAyNzE2NiBNQi9z
-ClsgICAgMi41MzU4NzVdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiB2cGVybXhv
-cjIgZ2VuKCkgMjEyODQgTUIvcwpbICAgIDIuNTgzODgwXSBlYmJkLm1vbGdlbi5tcGcuZGUga2Vy
-bmVsOiByYWlkNjogdnBlcm14b3IxIGdlbigpIDE0NjM5IE1CL3MKWyAgICAyLjYzMTg3MV0gZWJi
-ZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4OCBnZW4oKSAxNDgzOSBNQi9z
-ClsgICAgMi42Nzk4NzRdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBhbHRpdmVj
-eDQgZ2VuKCkgMTczMjMgTUIvcwpbICAgIDIuNzI3ODk3XSBlYmJkLm1vbGdlbi5tcGcuZGUga2Vy
-bmVsOiByYWlkNjogYWx0aXZlY3gyIGdlbigpIDEyMTEyIE1CL3MKWyAgICAyLjc3NTg4OV0gZWJi
-ZC5tb2xnZW4ubXBnLmRlIGtlcm5lbDogcmFpZDY6IGFsdGl2ZWN4MSBnZW4oKSAxMTM1MCBNQi9z
-ClsgICAgMi44MjM4NjBdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg4
-ICBnZW4oKSAgNDkyMCBNQi9zClsgICAgMi44NzE5MDhdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJu
-ZWw6IHJhaWQ2OiBpbnQ2NHg4ICB4b3IoKSAgMjk3MyBNQi9zClsgICAgMi45MTk5MDhdIGViYmQu
-bW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg0ICBnZW4oKSAgNTYzMyBNQi9zClsg
-ICAgMi45Njc5MTVdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHg0ICB4
-b3IoKSAgMzI0NiBNQi9zClsgICAgMy4wMTU4NjZdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6
-IHJhaWQ2OiBpbnQ2NHgyICBnZW4oKSAgNDk5NSBNQi9zClsgICAgMy4wNjM4NzZdIGViYmQubW9s
-Z2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHgyICB4b3IoKSAgMjUzOCBNQi9zClsgICAg
-My4xMTE4OTZdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiBpbnQ2NHgxICBnZW4o
-KSAgMzk1MCBNQi9zClsgICAgMy4xNTk4NjhdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJh
-aWQ2OiBpbnQ2NHgxICB4b3IoKSAgMTk1OCBNQi9zClsgICAgMy4xNTk4NzBdIGViYmQubW9sZ2Vu
-Lm1wZy5kZSBrZXJuZWw6IHJhaWQ2OiB1c2luZyBhbGdvcml0aG0gCnZwZXJteG9yOCBnZW4oKSAx
-OTgyOCBNQi9zClsgICAgMy4xNTk4NzFdIGViYmQubW9sZ2VuLm1wZy5kZSBrZXJuZWw6IHJhaWQ2
-OiB1c2luZyBpbnR4MSByZWNvdmVyeSAKYWxnb3JpdGhtCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCkxpbnV4cHBjLXVzZXJzIG1haWxpbmcgbGlzdApMaW51
-eHBwYy11c2Vyc0BsaXN0cy5vemxhYnMub3JnCmh0dHBzOi8vbGlzdHMub3psYWJzLm9yZy9saXN0
-aW5mby9saW51eHBwYy11c2Vycwo=
+On Samstag, 29. Januar 2022 21:22:37 CET Paul Menzel wrote:
+
+Hi Paul,
+
+> [    1.381350] ebbd.molgen.mpg.de kernel: raid6: vpermxor8 gen() 23033 MB/s
+> [    2.130343] ebbd.molgen.mpg.de kernel: raid6: using algorithm
+> vpermxor8 gen() 23033 MB/s
+> [    2.130418] ebbd.molgen.mpg.de kernel: raid6: using intx1 recovery
+> algorithm
+
+> For the recovery algorithm, it chooses intx1. Do you know why? 
+
+There is no other implementation available on powerpc. the recovery algorithm 
+is defined by raid6_recov_algos - it has no implementation for powerpc, so 
+there is only one, and it picks that one.
+
+for gen() there are multiple ones available, and it benchmarks the most 
+performing one and picks that one. 
+
+Greetings,
+Dirk
+
+
+
+
+_______________________________________________
+Linuxppc-users mailing list
+Linuxppc-users@lists.ozlabs.org
+https://lists.ozlabs.org/listinfo/linuxppc-users

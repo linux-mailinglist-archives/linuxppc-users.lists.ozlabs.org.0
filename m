@@ -2,78 +2,38 @@ Return-Path: <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.o
 X-Original-To: lists+linuxppc-users@lfdr.de
 Delivered-To: lists+linuxppc-users@lfdr.de
 Received: from lists.ozlabs.org (lists.ozlabs.org [IPv6:2404:9400:2:0:216:3eff:fee1:b9f1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3AAC4A6036
-	for <lists+linuxppc-users@lfdr.de>; Tue,  1 Feb 2022 16:34:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA1274BA709
+	for <lists+linuxppc-users@lfdr.de>; Thu, 17 Feb 2022 18:25:46 +0100 (CET)
 Received: from boromir.ozlabs.org (localhost [IPv6:::1])
-	by lists.ozlabs.org (Postfix) with ESMTP id 4Jp89h4P0tz2xrm
-	for <lists+linuxppc-users@lfdr.de>; Wed,  2 Feb 2022 02:34:16 +1100 (AEDT)
-Authentication-Results: lists.ozlabs.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ocbO1/sR;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=iLaTR1bI;
-	dkim-atps=neutral
+	by lists.ozlabs.org (Postfix) with ESMTP id 4K01tw1Xtsz3cYg
+	for <lists+linuxppc-users@lfdr.de>; Fri, 18 Feb 2022 04:25:44 +1100 (AEDT)
 X-Original-To: linuxppc-users@lists.ozlabs.org
 Delivered-To: linuxppc-users@lists.ozlabs.org
-Authentication-Results: lists.ozlabs.org;
- spf=pass (sender SPF authorized) smtp.mailfrom=suse.de
- (client-ip=195.135.220.28; helo=smtp-out1.suse.de;
- envelope-from=dmueller@suse.de; receiver=<UNKNOWN>)
-Authentication-Results: lists.ozlabs.org; dkim=pass (1024-bit key;
- unprotected) header.d=suse.de header.i=@suse.de header.a=rsa-sha256
- header.s=susede2_rsa header.b=ocbO1/sR; 
- dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=iLaTR1bI; 
- dkim-atps=neutral
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+Authentication-Results: lists.ozlabs.org; spf=pass (sender SPF authorized)
+ smtp.mailfrom=molgen.mpg.de (client-ip=141.14.17.11; helo=mx1.molgen.mpg.de;
+ envelope-from=pmenzel@molgen.mpg.de; receiver=<UNKNOWN>)
+Received: from mx1.molgen.mpg.de (mx3.molgen.mpg.de [141.14.17.11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by lists.ozlabs.org (Postfix) with ESMTPS id 4Jp05V0gwQz2xsc
- for <linuxppc-users@lists.ozlabs.org>; Tue,  1 Feb 2022 20:30:05 +1100 (AEDT)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 2CAAC21114;
- Tue,  1 Feb 2022 09:30:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1643707801; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uzJ9IaZwktVODOrMTmYN4f2QjcibjowW5LwRCfHtnJs=;
- b=ocbO1/sRt2JfttmRSAK+QnNIhFQZnISwZ6cBR9M/GmeE2V6iTJ2Xgvl02j7xmK3Bh044M0
- zV3s4SNxn3sItM7YKhiahZFbPX3zKnRQx1dfLaY3cMEmR1sudJmDHocEBySC4HE+yAA055
- QTOjp2V2wQCPqOJBgCpjC6cSU0V+zik=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1643707801;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uzJ9IaZwktVODOrMTmYN4f2QjcibjowW5LwRCfHtnJs=;
- b=iLaTR1bIp9V7QZ0fcMGyFOqimwzXZnzgoIMHivQA4JzWxPBCWST9lMnCbj9MkrnTXk9emn
- dF5XQ2HrVdtz94DA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1821813CF0;
- Tue,  1 Feb 2022 09:30:01 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id gdraBJn9+GGWcAAAMHmgww
- (envelope-from <dmueller@suse.de>); Tue, 01 Feb 2022 09:30:01 +0000
-From: Dirk =?ISO-8859-1?Q?M=FCller?= <dmueller@suse.de>
-To: linuxppc-users@lists.ozlabs.org, Paul Menzel <pmenzel@molgen.mpg.de>
-Date: Tue, 01 Feb 2022 10:30:00 +0100
-Message-ID: <2872057.ZOAX1rYKIr@magnolia>
-Organization: SUSE Software Solutions Germany GmbH; GF: Ivo Totev;
- HRB 36809 (AG =?UTF-8?B?TsO8cm5iZXJnKQ==?=
-In-Reply-To: <bcda57e8-50d2-c2be-de9d-8ed97effb783@molgen.mpg.de>
-References: <bcda57e8-50d2-c2be-de9d-8ed97effb783@molgen.mpg.de>
+ by lists.ozlabs.org (Postfix) with ESMTPS id 4K01tj5lT3z3cPD
+ for <linuxppc-users@lists.ozlabs.org>; Fri, 18 Feb 2022 04:25:32 +1100 (AEDT)
+Received: from [192.168.0.2] (ip5f5aeb9b.dynamic.kabel-deutschland.de
+ [95.90.235.155])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: pmenzel)
+ by mx.molgen.mpg.de (Postfix) with ESMTPSA id A8CCE61E6478B
+ for <linuxppc-users@lists.ozlabs.org>; Thu, 17 Feb 2022 18:25:27 +0100 (CET)
+Message-ID: <20c1f6ca-38c1-472d-6ed2-5ebf83602966@molgen.mpg.de>
+Date: Thu, 17 Feb 2022 18:25:27 +0100
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 02 Feb 2022 02:34:07 +1100
-Subject: Re: [Linuxppc-users] Linux: raid6 benchmark: using intx1 recovery
- algorithm
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.0
+Content-Language: en-US
+To: linuxppc-users@lists.ozlabs.org
+From: Paul Menzel <pmenzel@molgen.mpg.de>
+Subject: [Linuxppc-users] raid6test results for POWER9 and Power10
 X-BeenThere: linuxppc-users@lists.ozlabs.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,37 +46,38 @@ List-Post: <mailto:linuxppc-users@lists.ozlabs.org>
 List-Help: <mailto:linuxppc-users-request@lists.ozlabs.org?subject=help>
 List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-users>,
  <mailto:linuxppc-users-request@lists.ozlabs.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org
 Sender: "Linuxppc-users"
  <linuxppc-users-bounces+lists+linuxppc-users=lfdr.de@lists.ozlabs.org>
 
-On Samstag, 29. Januar 2022 21:22:37 CET Paul Menzel wrote:
-
-Hi Paul,
-
-> [    1.381350] ebbd.molgen.mpg.de kernel: raid6: vpermxor8 gen() 23033 MB/s
-> [    2.130343] ebbd.molgen.mpg.de kernel: raid6: using algorithm
-> vpermxor8 gen() 23033 MB/s
-> [    2.130418] ebbd.molgen.mpg.de kernel: raid6: using intx1 recovery
-> algorithm
-
-> For the recovery algorithm, it chooses intx1. Do you know why? 
-
-There is no other implementation available on powerpc. the recovery algorithm 
-is defined by raid6_recov_algos - it has no implementation for powerpc, so 
-there is only one, and it picks that one.
-
-for gen() there are multiple ones available, and it benchmarks the most 
-performing one and picks that one. 
-
-Greetings,
-Dirk
+Dear PPC users,
 
 
+On the POWER8 server IBM S822LC, Linux 5.17-rc1 reports:
+
+     raid6: vpermxor8 gen() 23343 MB/s
+     raid6: vpermxor4 gen() 22306 MB/s
+     raid6: vpermxor2 gen() 17970 MB/s
+     raid6: vpermxor1 gen() 12650 MB/s
+     raid6: altivecx8 gen() 13845 MB/s
+     raid6: altivecx4 gen() 12820 MB/s
+     raid6: altivecx2 gen() 12673 MB/s
+     raid6: altivecx1 gen()  9287 MB/s
+     raid6: int64x8  gen()  3908 MB/s
+     raid6: int64x4  gen()  4939 MB/s
+     raid6: int64x2  gen()  3960 MB/s
+     raid6: int64x1  gen()  2906 MB/s
+     raid6: using algorithm vpermxor8 gen() 23343 MB/s
+     raid6: using intx1 recovery algorithm
+
+Can somebody please post the benchmark results for POWER9 and Power10?
 
 
+Kind regards,
+
+Paul
 _______________________________________________
 Linuxppc-users mailing list
 Linuxppc-users@lists.ozlabs.org
